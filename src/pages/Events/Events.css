@@ -1,0 +1,41 @@
+#events {
+  min-height: 90svh;
+  background-color: rgb(98, 140, 57);
+}
+
+.event {
+  max-width: 600px; /* Establece un ancho máximo */
+  margin: 0 auto; /* Centra el elemento horizontalmente */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.event h2 {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.event p {
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.event img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* Optional: Style the date, createdBy, and attendants paragraphs */
+.event p:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+.event p:nth-last-child(1) {
+  font-style: italic;
+}
