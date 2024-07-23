@@ -5,7 +5,9 @@ import { renderPage } from '../../../utils/functions/renderPage';
 import { Button } from '../../components/Button/Button';
 import { LoginForm } from '../../components/LoginForm/LoginForm';
 import { RegisterForm } from '../../components/RegisterForm/RegisterForm';
+import { CreateEvent } from '../CreateEvent/CreateEvent';
 import { Events } from '../Events/Events';
+import { UserGestion } from '../UserGestion/UserGestion';
 
 import './Login.css';
 
@@ -55,9 +57,17 @@ export const Login = () => {
       if (isAuthenticated) {
         welcomeMessage.textContent = 'Bienvenido!';
         welcomeMessage.style.display = 'block';
-
         setTimeout(() => {
-          navigate({ e: event, page: Events, path: '/events' });
+          const role = localStorage.getItem('rol');
+          if (role === 'admin') {
+            navigate({
+              e: event,
+              page: CreateEvent,
+              path: '/event-administration',
+            }); // Redirige al administrador
+          } else {
+            navigate({ e: event, page: Events, path: '/events' }); // Redirige a la página de eventos
+          }
         }, 1000);
       } else {
         throw new Error('Autenticación fallida.');

@@ -1,8 +1,10 @@
 import { ConfirmedEvents } from '../../src/pages/ConfirmedEvents/ConfirmedEvents';
+import { CreateEvent } from '../../src/pages/CreateEvent/CreateEvent';
 import { Events } from '../../src/pages/Events/Events';
 import { Home } from '../../src/pages/Home/Home';
 import { Login } from '../../src/pages/Login/Login';
 import { Profile } from '../../src/pages/Profile/Profile';
+import { UserGestion } from '../../src/pages/UserGestion/UserGestion';
 import { Logout } from '../functions/logout';
 
 export const navLinks = [
@@ -35,6 +37,19 @@ export const navLinks = [
     path: '/profile',
     page: Profile, // Asume que `Profile` es el componente importado correspondiente
     roles: ['user'], // Permitido para usuarios con rol "user"
+  },
+
+  {
+    text: 'Gestión de Eventos',
+    path: '/event-administration',
+    page: CreateEvent,
+    roles: ['admin'],
+  },
+  {
+    text: 'Gestión de Usuarios',
+    path: '/user-administration',
+    page: UserGestion,
+    roles: ['admin'],
   },
   {
     text: 'Logout',

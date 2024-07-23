@@ -32,7 +32,11 @@ export const createEventComponent = (
 
   if (showCreatedBy) {
     const createdBy = document.createElement('p');
-    createdBy.textContent = `Creado por: ${event.createdBy.userName}`;
+    if (event.createdBy && event.createdBy.userName) {
+      createdBy.textContent = `Creado por: ${event.createdBy.userName}`;
+    } else {
+      createdBy.textContent = `Creado por: Información no disponible`;
+    }
     eventDiv.appendChild(createdBy);
   }
 
