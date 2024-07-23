@@ -58,7 +58,7 @@ export const Login = () => {
 
         setTimeout(() => {
           navigate({ e: event, page: Events, path: '/events' });
-        }, 2000);
+        }, 1000);
       } else {
         throw new Error('Autenticación fallida.');
       }
