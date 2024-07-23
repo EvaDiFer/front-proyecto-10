@@ -1,21 +1,34 @@
-import { getRole } from '../../../utils/functions/getRole';
 import { navigate } from '../../../utils/functions/navigate';
 import './NavLink.css';
 
 export const NavLink = ({ parentNode, link }) => {
-  const { text, page, path } = link;
+  const { text, page, path, roles } = link;
 
-  const li = document.createElement('li');
-  li.classList.add(
-    'nav-link',
-    `nav-link-${text.toLowerCase().replaceAll(' ', '-')}`
-  );
+  let userRole;
+  try {
+    userRole = localStorage.getItem('rol') || 'guest';
+  } catch (e) {
+    console.error('Error getting role from localStorage:', e);
+    userRole = 'guest';
+  }
 
-  const a = document.createElement('a');
-  a.textContent = text;
-  a.href = path;
-  li.append(a);
-  parentNode.append(li);
+  if (roles.includes(userRole)) {
+    const li = document.createElement('li');
+    li.classList.add(
+      'nav-link',
+      `nav-link-${text.toLowerCase().replaceAll(' ', '-')}`
+    );
+    const a = document.createElement('a');
+    a.textContent = text;
+    a.href = path;
+    li.append(a);
+    parentNode.append(li);
+    a.addEventListener('click', (e) => navigate({ e, page, text, path }));
 
-  a.addEventListener('click', (e) => navigate({ e, page, text, path }));
+    // Asegúrate de que el enlace se añade correctamente al parentNode.
+    console.log(`Enlace añadido: ${text}`);
+  } else {
+    // Caso para debuggear por qué no se añade el enlace.
+    console.log(`Rol "${userRole}" no permitido para el enlace: ${text}`);
+  }
 };

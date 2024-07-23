@@ -1,0 +1,64 @@
+/* Estilos para el formulario de perfil */
+#profileForm {
+  margin-top: 20px;
+  max-width: 600px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+/* Estilo para cada grupo de formulario */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Estilo para las etiquetas */
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Estilo para las entradas de texto y correo */
+.form-group input[type='text'],
+.form-group input[type='email'],
+.form-group input[type='file'] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Estilo para la imagen de perfil */
+.profile-image {
+  max-width: 100px;
+  border-radius: 8px;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Estilo para el botón de guardar cambios */
+#profileForm button[type='submit'] {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+#profileForm button[type='submit']:hover {
+  background-color: #218838;
+}
+
+/* Estilo para mensajes de error */
+.error-message {
+  color: red;
+  font-size: 16px;
+}

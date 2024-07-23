@@ -3,6 +3,7 @@ export const Logout = () => {
 
   localStorage.removeItem('token');
   localStorage.removeItem('rol');
+  localStorage.removeItem('userId');
 
   window.location.href = '/';
 };

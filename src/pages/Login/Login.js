@@ -6,6 +6,7 @@ import { Button } from '../../components/Button/Button';
 import { LoginForm } from '../../components/LoginForm/LoginForm';
 import { RegisterForm } from '../../components/RegisterForm/RegisterForm';
 import { Events } from '../Events/Events';
+
 import './Login.css';
 
 let showLogin = true;
@@ -45,21 +46,26 @@ export const Login = () => {
     event.preventDefault();
     spinner.style.display = 'block';
     welcomeMessage.style.display = 'none';
-    try {
-      if (showLogin) {
-        await goLogin(event);
-      } else {
-        await goRegister(event);
-      }
 
-      welcomeMessage.textContent =
-        'Bienvenido! Redirigiendo a la página de eventos...';
-      welcomeMessage.style.display = 'block';
-      setTimeout(() => {
-        navigate({ e: event, page: Events, path: '/events' });
-      }, 2000);
+    try {
+      const isAuthenticated = showLogin
+        ? await goLogin(event)
+        : await goRegister(event);
+
+      if (isAuthenticated) {
+        welcomeMessage.textContent = 'Bienvenido!';
+        welcomeMessage.style.display = 'block';
+
+        setTimeout(() => {
+          navigate({ e: event, page: Events, path: '/events' });
+        }, 2000);
+      } else {
+        throw new Error('Autenticación fallida.');
+      }
     } catch (error) {
-      console.error(error);
+      console.error('Error en la autenticación:', error);
+      welcomeMessage.textContent = error.message || 'Error de autenticación.';
+      welcomeMessage.style.display = 'block';
     } finally {
       setTimeout(() => {
         spinner.style.display = 'none';
