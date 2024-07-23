@@ -22,7 +22,7 @@ export const goLogin = async (e) => {
 
     if (res && res.token && res.user) {
       localStorage.setItem('token', res.token);
-      localStorage.setItem('rol', res.user.rol);
+      localStorage.setItem('rol', res.user.rol); // Asegúrate de que 'rol' esté presente en la respuesta
       localStorage.setItem('userId', res.user._id);
 
       RenderLinks();

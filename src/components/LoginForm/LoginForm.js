@@ -6,7 +6,7 @@ export const LoginForm = (form) => {
   form.className = 'login-form';
 
   form.innerHTML = `
-    ${FormComponent({ labelText: 'userName' })}
+    ${FormComponent({ labelText: 'Nombre Usuario' })}
     ${FormComponent({ labelText: 'Contraseña', type: 'password' })}
 `;
 

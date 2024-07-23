@@ -1,6 +1,6 @@
 #home {
   min-height: 90svh;
-  background-color: rgb(205, 153, 253);
+  background-color: rgb(157, 216, 242);
 }
 
 /* Estilos para el encabezado h2 */
@@ -30,6 +30,6 @@ p {
 /* Estilos para el mensaje de autenticación */
 .auth-message {
   font-size: 14px;
-  color: #900; /* Color del texto rojo para mensajes importantes */
+  color: rgb(46, 34, 34); /* Color del texto rojo para mensajes importantes */
   margin-top: 10px; /* Espacio superior */
 }

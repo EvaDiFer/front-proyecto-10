@@ -6,7 +6,7 @@ export const RegisterForm = (form) => {
   form.className = 'register-form';
 
   form.innerHTML = `
-        ${FormComponent({ labelText: 'userName' })}
+        ${FormComponent({ labelText: 'Nombre Usuario' })}
         ${FormComponent({ labelText: 'Contraseña', type: 'password' })}
         ${FormComponent({ labelText: 'Email', type: 'email' })}
         
