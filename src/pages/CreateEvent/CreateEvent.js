@@ -1,6 +1,13 @@
-import { fetchRequest } from '../../../utils/API/fetch';
+import {
+  createEvent,
+  deleteEventRequest,
+  fetchEvents,
+  updateEventRequest,
+} from '../../../utils/functions/fetchForAdminEvents';
 import { renderPage } from '../../../utils/functions/renderPage';
+import { Button } from '../../components/Button/Button';
 import { EventForAdmin } from '../../components/EventForAdmin/EventForAdmin';
+
 import './CreateEvent.css';
 
 export const CreateEvent = async () => {
@@ -11,110 +18,162 @@ export const CreateEvent = async () => {
   heading.textContent = 'Estos son todos los eventos creados';
   div.appendChild(heading);
 
+  // Crear el formulario
   const form = document.createElement('form');
   form.classList.add('event-form');
 
+  // Crear los elementos del formulario
   const titleInput = document.createElement('input');
   titleInput.type = 'text';
   titleInput.placeholder = 'Título del evento';
   titleInput.name = 'title';
   form.appendChild(titleInput);
 
-  // Descripción del evento
   const descriptionInput = document.createElement('textarea');
   descriptionInput.placeholder = 'Descripción del evento';
   descriptionInput.name = 'description';
   form.appendChild(descriptionInput);
 
-  // URL de la imagen del evento (cambiado a input tipo file)
   const imageInput = document.createElement('input');
   imageInput.type = 'file';
-  imageInput.accept = 'image/*'; // Aceptar solo imágenes
-  imageInput.name = 'imageUrl'; // Asegúrate de que esto coincida con el backend
+  imageInput.accept = 'image/*';
+  imageInput.name = 'imageUrl';
   form.appendChild(imageInput);
 
-  // Fecha del evento
   const dateInput = document.createElement('input');
   dateInput.type = 'date';
   dateInput.name = 'date';
   form.appendChild(dateInput);
 
-  // Botón de envío
-  const submitButton = document.createElement('button');
-  submitButton.type = 'submit';
-  submitButton.textContent = 'Crear Evento';
+  // Obtener el ID del creador del local storage
+  const creatorId = localStorage.getItem('userId');
+  const creatorInput = document.createElement('input');
+  creatorInput.type = 'hidden'; // Oculto para el usuario
+  creatorInput.name = 'createdBy';
+  creatorInput.value = creatorId;
+  form.appendChild(creatorInput);
+
+  // Crear el botón de enviar usando el componente Button
+  const submitButton = Button({
+    text: 'Crear Evento',
+    fnc: (event) => {
+      event.preventDefault();
+      handleSubmit();
+    },
+    className: 'submit-button',
+  });
   form.appendChild(submitButton);
 
-  // Crear un contenedor para el mensaje de éxito
-  const successMessage = document.createElement('div');
-  successMessage.id = 'successMessage';
-  successMessage.style.display = 'none'; // Ocultar inicialmente
-  successMessage.style.color = 'green';
-  div.appendChild(successMessage);
+  // Crear el botón de cancelar usando el componente Button (inicialmente no se muestra)
+  const cancelButton = Button({
+    text: 'Cancelar',
+    fnc: () => {
+      resetForm();
+    },
+    className: 'cancel-button',
+  });
+  cancelButton.style.display = 'none'; // Ocultar inicialmente
+  form.appendChild(cancelButton);
 
-  // Añadir el formulario al contenedor
+  // Crear un elemento para el mensaje de archivo
+  const fileMessage = document.createElement('p');
+  fileMessage.textContent =
+    'Seleccione una nueva imagen solo si desea actualizar la existente.';
+  fileMessage.style.display = 'none'; // Ocultarlo inicialmente
+  form.appendChild(fileMessage);
+
+  // Agregar formulario al contenedor principal
   div.appendChild(form);
 
-  // Función para manejar el envío del formulario
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault();
+  let isEditing = false;
+  let editingEventId = null;
 
+  const handleSubmit = async () => {
     const formData = new FormData(form);
 
-    console.log('Form Data Entries:');
-    formData.forEach((value, key) => {
-      console.log(`${key}: ${value}`);
-    });
-
     try {
-      // Realizar la solicitud POST para crear el nuevo evento
-      await fetchRequest({
-        endpoint: '/events',
-        method: 'POST',
-        body: formData,
-        token: token,
-        isFile: true,
-      });
-
-      // Limpiar el formulario
-      form.reset();
-
-      // Mostrar mensaje de éxito
-      const successElement = document.getElementById('successMessage');
-      if (successElement) {
-        successElement.textContent = 'Evento creado con éxito!';
-        successElement.style.display = 'block';
+      if (isEditing) {
+        await updateEventRequest(editingEventId, formData, token);
+        alert('Evento actualizado con éxito!');
+        resetForm();
+      } else {
+        await createEvent(formData, token);
+        alert('Evento creado con éxito!');
+        form.reset();
       }
 
-      // Actualizar la lista de eventos
       await loadEvents();
     } catch (error) {
-      console.error('Error al crear el evento:', error.message);
-
-      // Mostrar mensaje de error
-      const successElement = document.getElementById('successMessage');
-      if (successElement) {
-        successElement.textContent =
-          'Error al crear el evento: ' + error.message;
-        successElement.style.color = 'red'; // Cambiar color para indicar error
-        successElement.style.display = 'block';
-      }
+      console.error('Error al crear/actualizar el evento:', error.message);
+      alert('Error al crear/actualizar el evento: ' + error.message);
     }
-  });
+  };
+
+  const resetForm = () => {
+    form.reset();
+    submitButton.textContent = 'Crear Evento';
+    fileMessage.style.display = 'none';
+    cancelButton.style.display = 'none'; // Ocultar el botón de cancelar
+    isEditing = false;
+    editingEventId = null;
+  };
 
   const loadEvents = async () => {
     try {
-      const response = await fetchRequest({
-        endpoint: '/events',
-        token: token,
-      });
+      const response = await fetchEvents(token);
 
-      // Limpia el contenedor antes de agregar los eventos
       div.innerHTML = '';
+      div.appendChild(heading);
       div.appendChild(form); // Reagregar el formulario al contenedor
 
       response.forEach((event) => {
         const eventComponent = EventForAdmin(event);
+
+        // Botón para eliminar evento usando el componente Button
+        const deleteButton = Button({
+          text: 'Eliminar evento',
+          fnc: async () => {
+            const userConfirmed = confirm(
+              '¿Estás seguro de que quieres eliminar este evento?'
+            );
+            if (userConfirmed) {
+              try {
+                await deleteEventRequest(event._id, token);
+                alert('Evento eliminado con éxito!');
+                await loadEvents();
+              } catch (error) {
+                console.error('Error al eliminar el evento:', error.message);
+                alert('Error al eliminar el evento: ' + error.message);
+              }
+            }
+          },
+          className: 'delete-button',
+        });
+        eventComponent.appendChild(deleteButton);
+
+        // Botón para editar evento usando el componente Button
+        const editButton = Button({
+          text: 'Editar evento',
+          fnc: () => {
+            // Llenar el formulario con los datos del evento
+            titleInput.value = event.title;
+            descriptionInput.value = event.description;
+            dateInput.value = event.date.split('T')[0];
+            imageInput.value = ''; // Resetear el campo de archivo
+
+            // Configurar el formulario para la edición
+            isEditing = true;
+            editingEventId = event._id;
+            submitButton.textContent = 'Actualizar Evento';
+
+            // Mostrar el mensaje de selección de archivo y el botón de cancelar
+            fileMessage.style.display = 'block';
+            cancelButton.style.display = 'inline'; // Mostrar el botón de cancelar
+          },
+          className: 'edit-button',
+        });
+        eventComponent.appendChild(editButton);
+
         div.appendChild(eventComponent);
       });
     } catch (error) {

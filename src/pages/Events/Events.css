@@ -1,17 +1,23 @@
 #events {
   min-height: 90svh;
+  display: flex;
+  flex-wrap: wrap; /* Permite que los eventos se envuelvan a la siguiente fila si no caben en una sola fila */
   background-color: rgb(98, 140, 57);
+  gap: 10px; /* Añade espacio entre los eventos */
+  padding: 10px; /* Añade un poco de relleno alrededor del contenedor */
 }
 
 .event {
   display: flex;
-  flex-direction: column;
-  max-width: 200px;
+  flex-direction: column; /* Asegura que el contenido interno del evento esté en columna */
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 100px; /* Permite que los eventos se ajusten automáticamente y tengan un tamaño mínimo de 200px */
+  max-width: 30%; /* Opcional: limita el ancho máximo de cada evento */
   margin: 0 auto;
   border: 1px solid #ccc;
   border-radius: 20px;
   padding: 15px;
-  margin-bottom: 10px;
   background-color: #f9f9f9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -28,8 +34,7 @@
 }
 
 .event img {
-  max-width: 30%;
-  margin-top: 20px;
+  max-width: 100%;
   height: auto;
   margin-bottom: 10px;
 }

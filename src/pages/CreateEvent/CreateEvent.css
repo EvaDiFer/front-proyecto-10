@@ -1,6 +1,25 @@
 #create-event {
   min-height: 90svh;
-  background-color: rgb(172, 146, 107);
+  display: flex;
+  flex-wrap: wrap; /* Permite que los eventos se envuelvan a la siguiente fila si no caben en una sola fila */
+  background-color: rgb(181, 194, 168);
+  gap: 10px; /* Añade espacio entre los eventos */
+  padding: 10px;
+}
+
+.event-admin {
+  display: flex;
+  flex-direction: column; /* Asegura que el contenido interno del evento esté en columna */
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 100px; /* Permite que los eventos se ajusten automáticamente y tengan un tamaño mínimo de 200px */
+  max-width: 200px; /* Opcional: limita el ancho máximo de cada evento */
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 200px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Estilo del formulario */
@@ -43,16 +62,6 @@
 
 .event-form button:hover {
   background-color: #0056b3;
-}
-
-/* Estilo de los eventos */
-.event {
-  border: 1px solid #ddd;
-  max-width: 100px;
-  border-radius: 4px;
-  padding: 15px;
-  margin-bottom: 20px;
-  background-color: #f9f9f9;
 }
 
 .event h2 {

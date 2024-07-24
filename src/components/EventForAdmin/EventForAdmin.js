@@ -1,8 +1,9 @@
-// EventForAdmin.js
 export const EventForAdmin = (event) => {
+  console.log('Datos del evento:', event); // Log del objeto completo
   const eventDiv = document.createElement('div');
-  eventDiv.classList.add('event');
+  eventDiv.classList.add('event-admin');
   eventDiv.id = `event-${event._id}`;
+  console.log(`ID del evento en EventForAdmin: ${event._id}`);
 
   // Crear y añadir el título
   const title = document.createElement('h2');
@@ -18,6 +19,10 @@ export const EventForAdmin = (event) => {
     const createdBy = document.createElement('p');
     createdBy.textContent = `Creado por: ${event.createdBy.userName}`;
     eventDiv.appendChild(createdBy);
+  } else {
+    console.log(
+      'El creador no está disponible o el nombre de usuario es inválido.'
+    );
   }
 
   // Crear y añadir la imagen si existe
