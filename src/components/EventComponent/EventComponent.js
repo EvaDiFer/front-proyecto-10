@@ -1,6 +1,12 @@
 import { cancelAttendance } from '../../../utils/functions/cancelAttendance';
 import { confirmAttendance } from '../../../utils/functions/confirmAttendance';
 
+// Asumimos que tienes una función para obtener el ID del usuario actual
+const getCurrentUserId = () => {
+  // Esta función debe devolver el ID del usuario actual. Ejemplo:
+  return localStorage.getItem('userId') || 'defaultUserId';
+};
+
 export const createEventComponent = (
   event,
   buttonText = 'Confirmar Asistencia',
@@ -32,36 +38,26 @@ export const createEventComponent = (
 
   if (showCreatedBy) {
     const createdBy = document.createElement('p');
-    if (event.createdBy && event.createdBy.userName) {
-      createdBy.textContent = `Creado por: ${event.createdBy.userName}`;
-    } else {
-      createdBy.textContent = `Creado por: Información no disponible`;
-    }
+    createdBy.textContent =
+      event.createdBy && event.createdBy.userName
+        ? `Creado por: ${event.createdBy.userName}`
+        : `Creado por: Información no disponible`;
     eventDiv.appendChild(createdBy);
   }
 
-  // Verificar el estado de asistencia en localStorage
-  const storedAttendanceStatus = localStorage.getItem(
-    `attendance-${event._id}`
-  );
+  const userId = getCurrentUserId(); // Obtener el ID del usuario actual
+  const storageKey = `attendance-${event._id}-${userId}`; // Usar el ID del usuario en la clave del localStorage
+  const storedAttendanceStatus = localStorage.getItem(storageKey);
   const isAttendanceConfirmed = storedAttendanceStatus === 'confirmed';
 
-  // Creando el botón para cancelar asistencia o confirmar asistencia
   const actionButton = document.createElement('button');
 
-  // Configurar el texto y el estado del botón basado en el estado de la página y la asistencia
   if (isConfirmedPage) {
-    // En la página de eventos confirmados, siempre mostrar "Cancelar Asistencia"
     actionButton.textContent = isAttendanceConfirmed
       ? 'Cancelar Asistencia'
       : 'No Confirmado';
-    if (isAttendanceConfirmed) {
-      actionButton.disabled = false;
-    } else {
-      actionButton.disabled = true;
-    }
+    actionButton.disabled = !isAttendanceConfirmed;
   } else {
-    // En la página de eventos normales, mostrar el texto del botón por defecto
     actionButton.textContent = isAttendanceConfirmed
       ? 'Asistencia Confirmada'
       : buttonText;
@@ -71,23 +67,37 @@ export const createEventComponent = (
   actionButton.addEventListener('click', async () => {
     if (isConfirmedPage) {
       if (isAttendanceConfirmed) {
-        // En la página de eventos confirmados, cancelar la asistencia
-        await cancelAttendance(event._id);
-        localStorage.setItem(`attendance-${event._id}`, 'cancelled');
+        // Cancelar la asistencia
+        await cancelAttendance(event._id, userId);
+        localStorage.setItem(storageKey, 'cancelled');
         actionButton.textContent = 'Asistencia Cancelada';
         actionButton.disabled = true;
+
+        // Eliminar el evento del DOM
         eventDiv.remove();
       }
     } else {
       if (isAttendanceConfirmed) {
-        // Si la asistencia ya está confirmada, no hace nada
+        // Asistencia ya confirmada, no hace nada
         return;
       } else if (actionButton.textContent === 'Confirmar Asistencia') {
-        // Confirmar asistencia en la página de eventos normales
-        await confirmAttendance(event._id);
-        localStorage.setItem(`attendance-${event._id}`, 'confirmed');
+        // Confirmar asistencia
+        await confirmAttendance(event._id, userId);
+        localStorage.setItem(storageKey, 'confirmed');
         actionButton.textContent = 'Asistencia Confirmada';
         actionButton.disabled = true;
+
+        // Mover el evento a la lista de eventos confirmados si es necesario
+        const normalEventsContainer = document.getElementById('normal-events');
+        if (normalEventsContainer) {
+          normalEventsContainer.removeChild(eventDiv);
+        }
+
+        const confirmedEventsContainer =
+          document.getElementById('confirmed-events');
+        if (confirmedEventsContainer) {
+          confirmedEventsContainer.appendChild(eventDiv);
+        }
       }
     }
   });

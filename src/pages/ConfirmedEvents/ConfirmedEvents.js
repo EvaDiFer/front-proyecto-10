@@ -4,10 +4,18 @@ import { createEventComponent } from '../../components/EventComponent/EventCompo
 
 export const ConfirmedEvents = async () => {
   const div = renderPage('confirmed-events');
+  if (!div) {
+    console.error('Contenedor "confirmed-events" no encontrado');
+    return;
+  }
+
   div.innerHTML = '<h1>Eventos Confirmados</h1>';
 
   const userId = localStorage.getItem('userId');
   const token = localStorage.getItem('token');
+
+  console.log('userId:', userId);
+  console.log('token:', token);
 
   if (!userId) {
     div.innerHTML +=
@@ -23,6 +31,7 @@ export const ConfirmedEvents = async () => {
       isJSON: true,
     });
 
+    console.log('Respuesta de la API:', response);
     const events = response.attendingEvents;
 
     if (!events || events.length === 0) {
@@ -30,10 +39,13 @@ export const ConfirmedEvents = async () => {
       return;
     }
 
+    console.log('Eventos confirmados:', events);
+
     const eventsContainer = document.createElement('div');
     eventsContainer.classList.add('events-container');
 
     events.forEach((event) => {
+      console.log('Evento en createEventComponent:', event);
       const eventElement = createEventComponent(
         event,
         'Cancelar Asistencia', // Texto del botón
