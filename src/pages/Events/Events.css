@@ -4,12 +4,14 @@
 }
 
 .event {
-  max-width: 600px; /* Establece un ancho máximo */
-  margin: 0 auto; /* Centra el elemento horizontalmente */
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  margin: 0 auto;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 20px;
   padding: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   background-color: #f9f9f9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -26,7 +28,8 @@
 }
 
 .event img {
-  max-width: 100%;
+  max-width: 30%;
+  margin-top: 20px;
   height: auto;
   margin-bottom: 10px;
 }

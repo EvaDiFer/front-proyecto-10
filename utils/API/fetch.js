@@ -21,7 +21,7 @@ export const fetchRequest = async ({
   let finalBody;
   if (isFile) {
     // Si es un archivo, usamos FormData
-    finalBody = new FormData();
+    finalBody = body;
     for (const key in body) {
       finalBody.append(key, body[key]);
     }
