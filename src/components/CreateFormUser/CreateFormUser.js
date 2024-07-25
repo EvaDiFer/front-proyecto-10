@@ -1,40 +1,23 @@
-import { FormComponent } from '../FormComponent/FormComponent';
-
-export const CreateFormUser = (defaultProfileImageUrl, updateProfile) => {
+export const ProfileForm = (updateProfile, defaultProfileImageUrl) => {
   const form = document.createElement('form');
   form.id = 'updateProfileForm';
   form.onsubmit = updateProfile;
 
   form.innerHTML = `
-    ${FormComponent({
-      labelText: 'Nombre de Usuario:',
-      id: 'userName',
-      name: 'userName',
-    })}
-    ${FormComponent({
-      labelText: 'Correo Electrónico:',
-      type: 'email',
-      id: 'email',
-      name: 'email',
-    })}
-    ${FormComponent({
-      labelText: 'Contraseña Actual:',
-      type: 'password',
-      required: false,
-      id: 'currentPassword',
-      name: 'currentPassword',
-    })}
-    ${FormComponent({
-      labelText: 'Nueva Contraseña:',
-      type: 'password',
-      required: false,
-      id: 'newPassword',
-      name: 'newPassword',
-    })}
-    <div class="field-form">
-      <label for="profileImageUrl">Imagen de Perfil:</label>
-      <input type="file" id="profileImageUrl" name="profileImageUrl" accept="image/*">
-    </div>
+    <label for="userName">Nombre de Usuario:</label>
+    <input type="text" id="userName" name="userName" required>
+    <br>
+    <label for="email">Correo Electrónico:</label>
+    <input type="email" id="email" name="email" required>
+    <br>
+    <label for="currentPassword">Contraseña Actual:</label>
+    <input type="password" id="currentPassword" name="currentPassword">
+    <br>
+    <label for="newPassword">Nueva Contraseña:</label>
+    <input type="password" id="newPassword" name="newPassword">
+    <br>
+    <label for="profileImageUrl">Imagen de Perfil:</label>
+    <input type="file" id="profileImageUrl" name="profileImageUrl" accept="image/*">
     <br>
     <img id="currentProfileImage" src="${defaultProfileImageUrl}" alt="Imagen de Perfil" style="display:block; width:100px; height:100px;">
     <br>

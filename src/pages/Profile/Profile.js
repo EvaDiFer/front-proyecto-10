@@ -1,6 +1,6 @@
 import { fetchRequest } from '../../../utils/API/fetch';
 import { renderPage } from '../../../utils/functions/renderPage';
-import { CreateFormUser } from '../../components/CreateFormUser/CreateFormUser';
+import { ProfileForm } from '../../components/CreateFormUser/CreateFormUser';
 
 export const Profile = async () => {
   const div = renderPage('perfil');
@@ -17,7 +17,6 @@ export const Profile = async () => {
 
   const updateProfile = async (event) => {
     event.preventDefault();
-
     const formData = new FormData(event.target);
 
     try {
@@ -37,7 +36,7 @@ export const Profile = async () => {
     }
   };
 
-  const form = CreateFormUser(defaultProfileImageUrl, updateProfile);
+  const form = ProfileForm(updateProfile, defaultProfileImageUrl);
   div.appendChild(form);
 
   const getUserData = async () => {
