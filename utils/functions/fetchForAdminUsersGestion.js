@@ -1,4 +1,4 @@
-import { fetchRequest } from '../API/fetch'; // Asegúrate de que esta ruta sea correcta
+import { fetchRequest } from '../API/fetch';
 
 export const fetchUsers = async (token) => {
   try {

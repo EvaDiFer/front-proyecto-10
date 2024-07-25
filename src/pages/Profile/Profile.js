@@ -11,6 +11,8 @@ export const Profile = async () => {
     return;
   }
 
+  const defaultProfileImageUrl = '/public/icons8-usuario-48.png';
+
   const updateProfile = async (event) => {
     event.preventDefault();
 
@@ -62,7 +64,7 @@ export const Profile = async () => {
     <label for="profileImageUrl">Imagen de Perfil:</label>
     <input type="file" id="profileImageUrl" name="profileImageUrl" accept="image/*">
     <br>
-    <img id="currentProfileImage" src="" alt="Imagen de Perfil" style="display:none; width:100px; height:100px;">
+    <img id="currentProfileImage" src="${defaultProfileImageUrl}" alt="Imagen de Perfil" style="display:block; width:100px; height:100px;">
     <br>
     <button type="submit">Actualizar Perfil</button>
   `;
@@ -90,11 +92,13 @@ export const Profile = async () => {
       document.getElementById('userName').value = userData.userName;
       document.getElementById('email').value = userData.email;
 
+      const profileImage = document.getElementById('currentProfileImage');
       if (userData.profileImageUrl) {
-        const profileImage = document.getElementById('currentProfileImage');
         profileImage.src = userData.profileImageUrl;
-        profileImage.style.display = 'block';
+      } else {
+        profileImage.src = defaultProfileImageUrl;
       }
+      profileImage.style.display = 'block';
     } catch (error) {
       console.error('Error:', error);
       alert('Error al obtener los datos del usuario');

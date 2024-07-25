@@ -1,3 +1,5 @@
+import './EventForAdmin.css';
+
 export const EventForAdmin = (event) => {
   console.log('Datos del evento:', event); // Log del objeto completo
   const eventDiv = document.createElement('div');

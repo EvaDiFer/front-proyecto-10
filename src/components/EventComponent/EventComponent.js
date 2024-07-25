@@ -1,7 +1,6 @@
 import { cancelAttendance } from '../../../utils/functions/cancelAttendance';
 import { confirmAttendance } from '../../../utils/functions/confirmAttendance';
 
-// Asumimos que tienes una función para obtener el ID del usuario actual
 const getCurrentUserId = () => {
   // Esta función debe devolver el ID del usuario actual. Ejemplo:
   return localStorage.getItem('userId') || 'defaultUserId';
@@ -69,7 +68,7 @@ export const createEventComponent = (
       if (isAttendanceConfirmed) {
         // Cancelar la asistencia
         await cancelAttendance(event._id, userId);
-        localStorage.setItem(storageKey, 'cancelled');
+        localStorage.removeItem(storageKey);
         actionButton.textContent = 'Asistencia Cancelada';
         actionButton.disabled = true;
 
@@ -86,12 +85,6 @@ export const createEventComponent = (
         localStorage.setItem(storageKey, 'confirmed');
         actionButton.textContent = 'Asistencia Confirmada';
         actionButton.disabled = true;
-
-        // Mover el evento a la lista de eventos confirmados si es necesario
-        const normalEventsContainer = document.getElementById('normal-events');
-        if (normalEventsContainer) {
-          normalEventsContainer.removeChild(eventDiv);
-        }
 
         const confirmedEventsContainer =
           document.getElementById('confirmed-events');
