@@ -1,0 +1,49 @@
+#attendee {
+  min-height: 90svh;
+  background-color: rgb(205, 140, 180);
+}
+
+/* Attendee.css */
+
+/* Estilos generales para la lista de eventos */
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1em; /* Espacio entre los eventos */
+  padding: 1em;
+}
+
+/* Estilos individuales para cada evento */
+.event-item {
+  background-color: #f9f9f9; /* Fondo claro para los eventos */
+  border: 1px solid #ddd; /* Borde gris claro */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 1em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Estilo para el título del evento */
+.event-item h2 {
+  margin-top: 0;
+  font-size: 1.5em;
+  color: #333; /* Color de texto oscuro */
+}
+
+/* Estilo para la lista de asistentes */
+.event-item p {
+  margin: 0;
+  font-size: 1em;
+  color: #666; /* Color de texto más claro */
+}
+
+/* Estilo para los asistentes */
+.event-item p span {
+  font-weight: bold;
+}
+
+/* Opcional: mejorar el aspecto del contenedor principal */
+.attendee-container {
+  max-width: 800px; /* Ancho máximo del contenedor */
+  margin: 0 auto; /* Centrar el contenedor en la página */
+  padding: 1em;
+}

@@ -1,3 +1,4 @@
+import { Attendee } from '../../src/pages/Attendee/Attendee';
 import { ConfirmedEvents } from '../../src/pages/ConfirmedEvents/ConfirmedEvents';
 import { CreateEvent } from '../../src/pages/CreateEvent/CreateEvent';
 import { Events } from '../../src/pages/Events/Events';
@@ -11,34 +12,39 @@ export const navLinks = [
   {
     text: 'Home',
     path: '/',
-    page: Home, // Asume que `Home` es el componente importado correspondiente
-    roles: ['guest'], // Solo permitido para usuarios invitados (guest)
+    page: Home,
+    roles: ['guest'],
   },
   {
     text: 'Login',
     path: '/login',
-    page: Login, // Asume que `Login` es el componente importado correspondiente
-    roles: ['guest'], // Solo permitido para usuarios invitados (guest)
+    page: Login,
+    roles: ['guest'],
   },
   {
     text: 'Eventos',
     path: '/events',
-    page: Events, // Asume que `Events` es el componente importado correspondiente
-    roles: ['user'], // Permitido para usuarios con rol "user"
+    page: Events,
+    roles: ['user'],
   },
   {
     text: 'Mis Eventos Confirmados',
     path: '/confirmed-events',
-    page: ConfirmedEvents, // Asume que `ConfirmedEvents` es el componente importado correspondiente
-    roles: ['user'], // Permitido para usuarios con rol "user"
+    page: ConfirmedEvents,
+    roles: ['user'],
+  },
+  {
+    text: 'Asistentes a Eventos',
+    path: '/attendee',
+    page: Attendee,
+    roles: ['user'],
   },
   {
     text: 'Modifica tu Perfil',
     path: '/profile',
-    page: Profile, // Asume que `Profile` es el componente importado correspondiente
-    roles: ['user'], // Permitido para usuarios con rol "user"
+    page: Profile,
+    roles: ['user'],
   },
-
   {
     text: 'Gestión de Eventos',
     path: '/event-administration',
@@ -54,7 +60,7 @@ export const navLinks = [
   {
     text: 'Logout',
     path: '/logout',
-    page: Logout, // Asume que `Logout` es el componente importado correspondiente
-    roles: ['user', 'admin'], // Permitido para usuarios con rol "user"
+    page: Logout,
+    roles: ['user', 'admin'],
   },
 ];
