@@ -1,64 +1,58 @@
-/* Estilos para el formulario de perfil */
-#profileForm {
-  margin-top: 20px;
-  max-width: 600px;
-  padding: 20px;
+/* Estilos generales del formulario */
+#updateProfileForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 300px;
+  margin-top: 100px;
+  padding: 30px;
   border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
   background-color: #f9f9f9;
 }
 
-/* Estilo para cada grupo de formulario */
-.form-group {
-  margin-bottom: 15px;
-}
-
-/* Estilo para las etiquetas */
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
+/* Estilos para las etiquetas y entradas */
+#updateProfileForm label {
   font-weight: bold;
+  margin-bottom: 5px;
 }
 
-/* Estilo para las entradas de texto y correo */
-.form-group input[type='text'],
-.form-group input[type='email'],
-.form-group input[type='file'] {
-  width: 100%;
+#updateProfileForm input[type='text'],
+#updateProfileForm input[type='email'],
+#updateProfileForm input[type='password'],
+#updateProfileForm input[type='file'] {
+  margin-bottom: 10px;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  width: 100%;
 }
 
-/* Estilo para la imagen de perfil */
-.profile-image {
-  max-width: 100px;
-  border-radius: 8px;
-  display: block;
+#updateProfileForm input[type='file'] {
+  padding: 0;
+}
+
+/* Estilos para la imagen de perfil */
+#currentProfileImage {
   margin-top: 10px;
-  margin-bottom: 10px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #ccc;
 }
 
-/* Estilo para el botón de guardar cambios */
-#profileForm button[type='submit'] {
-  background-color: #28a745;
-  color: #fff;
+/* Estilos para el botón */
+#updateProfileForm button {
+  padding: 10px;
   border: none;
-  padding: 10px 20px;
   border-radius: 4px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background-color 0.3s;
 }
 
-#profileForm button[type='submit']:hover {
-  background-color: #218838;
-}
-
-/* Estilo para mensajes de error */
-.error-message {
-  color: red;
-  font-size: 16px;
+#updateProfileForm button:hover {
+  background-color: #45a049;
 }

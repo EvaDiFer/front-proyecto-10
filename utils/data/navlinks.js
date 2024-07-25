@@ -43,7 +43,7 @@ export const navLinks = [
     text: 'Modifica tu Perfil',
     path: '/profile',
     page: Profile,
-    roles: ['user'],
+    roles: ['user', 'admin'],
   },
   {
     text: 'Gestión de Eventos',

@@ -1,6 +1,7 @@
 import { fetchRequest } from '../../../utils/API/fetch';
 import { renderPage } from '../../../utils/functions/renderPage';
 import { ProfileForm } from '../../components/CreateFormUser/CreateFormUser';
+import './Profile.css';
 
 export const Profile = async () => {
   const div = renderPage('perfil');
@@ -13,7 +14,7 @@ export const Profile = async () => {
     return;
   }
 
-  const defaultProfileImageUrl = '/public/icons8-usuario-48.png';
+  const defaultProfileImageUrl = '/icons8-usuario-48.png';
 
   const updateProfile = async (event) => {
     event.preventDefault();
