@@ -11,6 +11,9 @@ export const UserGestion = () => {
   const div = renderPage('user-gestion');
   div.innerHTML = `
     <h2>Gestión de Usuarios</h2>
+    <div id="search-container">
+      <input type="text" id="search-input" placeholder="Buscar por nombre..." />
+    </div>
     <div id="user-list">
       <table id="user-table">
         <thead>
@@ -27,9 +30,11 @@ export const UserGestion = () => {
   `;
 
   const userListTableBody = div.querySelector('#user-table tbody');
+  const searchInput = div.querySelector('#search-input');
   const defaultProfileImageUrl = '/icons8-usuario-48.png'; // Asegúrate de que esta ruta sea correcta
+  let allUsers = [];
 
-  const renderUsers = async () => {
+  const renderUsers = async (searchTerm = '') => {
     try {
       const token = localStorage.getItem('token'); // Obtener el token desde localStorage
       if (!token) {
@@ -37,9 +42,16 @@ export const UserGestion = () => {
       }
 
       const users = await fetchUsers(token);
+      allUsers = users; // Guardar todos los usuarios para búsquedas futuras
+
+      // Filtrar usuarios por userName que contiene el término de búsqueda
+      const filteredUsers = users.filter((user) =>
+        user.userName.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
       userListTableBody.innerHTML = ''; // Limpiar la tabla de usuarios antes de renderizar
 
-      users.forEach((user) => {
+      filteredUsers.forEach((user) => {
         const profileImageUrl = user.profileImageUrl
           ? user.profileImageUrl
           : defaultProfileImageUrl; // Usar operador ternario para la imagen de perfil
@@ -114,6 +126,11 @@ export const UserGestion = () => {
     const isDetailsVisible = detailsRow.style.display === 'table-row';
     detailsRow.style.display = isDetailsVisible ? 'none' : 'table-row';
   };
+
+  searchInput.addEventListener('input', (event) => {
+    const searchTerm = event.target.value;
+    renderUsers(searchTerm);
+  });
 
   renderUsers();
 };
