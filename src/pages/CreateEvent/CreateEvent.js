@@ -67,7 +67,8 @@ export const CreateEvent = async () => {
   // Crear el botón de cancelar usando el componente Button (inicialmente no se muestra)
   const cancelButton = Button({
     text: 'Cancelar',
-    fnc: () => {
+    fnc: (event) => {
+      event.preventDefault();
       resetForm();
     },
     className: 'cancel-button',
