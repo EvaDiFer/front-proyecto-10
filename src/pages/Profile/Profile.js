@@ -1,4 +1,6 @@
+import { fetchRequest } from '../../../utils/API/fetch';
 import { renderPage } from '../../../utils/functions/renderPage';
+import { CreateFormUser } from '../../components/CreateFormUser/CreateFormUser';
 
 export const Profile = async () => {
   const div = renderPage('perfil');
@@ -19,22 +21,13 @@ export const Profile = async () => {
     const formData = new FormData(event.target);
 
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/v1/users/${userId}`,
-        {
-          method: 'PUT',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: formData,
-        }
-      );
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.message || 'Error en la actualización');
-      }
+      const result = await fetchRequest({
+        endpoint: `/users/${userId}`,
+        method: 'PUT',
+        body: formData,
+        token: token,
+        isFile: true,
+      });
 
       alert('Perfil actualizado con éxito');
       await getUserData();
@@ -44,50 +37,16 @@ export const Profile = async () => {
     }
   };
 
-  const form = document.createElement('form');
-  form.id = 'updateProfileForm';
-  form.onsubmit = updateProfile;
-
-  form.innerHTML = `
-    <label for="userName">Nombre de Usuario:</label>
-    <input type="text" id="userName" name="userName" required>
-    <br>
-    <label for="email">Correo Electrónico:</label>
-    <input type="email" id="email" name="email" required>
-    <br>
-    <label for="currentPassword">Contraseña Actual:</label>
-    <input type="password" id="currentPassword" name="currentPassword">
-    <br>
-    <label for="newPassword">Nueva Contraseña:</label>
-    <input type="password" id="newPassword" name="newPassword">
-    <br>
-    <label for="profileImageUrl">Imagen de Perfil:</label>
-    <input type="file" id="profileImageUrl" name="profileImageUrl" accept="image/*">
-    <br>
-    <img id="currentProfileImage" src="${defaultProfileImageUrl}" alt="Imagen de Perfil" style="display:block; width:100px; height:100px;">
-    <br>
-    <button type="submit">Actualizar Perfil</button>
-  `;
-
+  const form = CreateFormUser(defaultProfileImageUrl, updateProfile);
   div.appendChild(form);
 
   const getUserData = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/v1/users/${userId}`,
-        {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('Error al obtener los datos del usuario');
-      }
-
-      const userData = await response.json();
+      const userData = await fetchRequest({
+        endpoint: `/users/${userId}`,
+        method: 'GET',
+        token: token,
+      });
 
       document.getElementById('userName').value = userData.userName;
       document.getElementById('email').value = userData.email;
