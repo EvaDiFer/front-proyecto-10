@@ -7,29 +7,40 @@ import { Button } from '../../components/Button/Button';
 export const Home = () => {
   const div = renderPage('home');
 
-  // Título
+  // Crear el div para el fondo con una imagen
+  const backgroundDiv = document.createElement('div');
+  backgroundDiv.className = 'background-container'; // Clase para el contenedor de fondo
+
+  const backgroundImg = document.createElement('img');
+  backgroundImg.src = '/public/image (1) (2).png';
+  backgroundImg.alt = 'Fondo de pantalla';
+  backgroundImg.className = 'background-image';
+
+  backgroundDiv.appendChild(backgroundImg);
+  div.appendChild(backgroundDiv);
+
+  const contentDiv = document.createElement('div');
+  contentDiv.className = 'content-wrapper';
+
   const title = document.createElement('h1');
   title.textContent = 'Bienvenidos a Nuestra Página de Eventos';
+  contentDiv.appendChild(title);
 
-  div.appendChild(title);
-
-  // Descripción
   const description = document.createElement('p');
   description.textContent =
     'Explora los eventos más emocionantes que hemos preparado para ti. ¡No te los pierdas!';
-  div.appendChild(description);
+  contentDiv.appendChild(description);
 
-  // Mensaje de registro
   const registerMessage = document.createElement('p');
   registerMessage.textContent =
     'Para ver todos nuestros eventos exclusivos, por favor inicia sesión a continuación.';
-  div.appendChild(registerMessage);
+  contentDiv.appendChild(registerMessage);
 
-  // Sección de botón de llamada a la acción
+  div.appendChild(contentDiv);
+
   const ctaSection = document.createElement('section');
-  ctaSection.style.textAlign = 'center';
+  ctaSection.className = 'cta-section';
 
-  // Utiliza el componente Button en lugar de crear el botón manualmente
   const loginButton = Button({
     text: 'Iniciar Sesión o Regístrate',
     fnc: (e) => {
@@ -39,7 +50,7 @@ export const Home = () => {
         path: '/login',
       });
     },
-    className: 'cta-button', // Añade una clase adicional si necesitas estilizar el botón
+    className: 'cta-button',
   });
 
   ctaSection.appendChild(loginButton);

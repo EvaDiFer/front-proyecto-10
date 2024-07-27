@@ -1,35 +1,99 @@
+/* General Styles for #home */
 #home {
   min-height: 90svh;
-  background-color: var(--color-2);
+  position: relative;
+  background-color: rgba(230, 209, 209, 0.144);
+  overflow: hidden;
 }
 
-/* Estilos para el encabezado h2 */
-h2 {
-  font-size: var(--font-size-sec);
-  color: var(--color-4);
-  margin-bottom: var(--margin-xs);
+/* Styles for the Background Container */
+.background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
 }
 
-/* Estilos para el párrafo */
-p {
-  font-size: var(--font-size-ter);
-  line-height: 1.5;
-  color: var(--color-3);
-  margin-bottom: var(--margin-s);
+/* Styles for the Background Image */
+.background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(30%);
 }
 
-/* Estilos para el contenedor de eventos */
-.events-container {
-  background-color: var(--color-1);
-  padding: var(--padding-s);
-  border-radius: var(--secondary-br);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: var(--margin-s);
+/* Centering Content Wrapper */
+.content-wrapper {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #0000007f;
+  z-index: 2;
 }
 
-/* Estilos para el mensaje de autenticación */
-.auth-message {
-  font-size: 14px;
-  color: var(--color-5);
-  margin-top: var(--margin-xs);
+/* Animation for Fade In and Up Effect */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply Animations to Text Elements */
+.content-wrapper h1,
+.content-wrapper p {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.content-wrapper h1 {
+  animation-delay: 0.5s;
+}
+
+.content-wrapper p {
+  animation-delay: 1s;
+}
+
+/* Centering CTA Section and Adding Transition */
+.cta-section {
+  position: absolute;
+  top: 33%;
+  left: 43%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 1;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+  animation-delay: 1.5s;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: rgb(124, 108, 95);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Solo la transición de cambio de color */
+}
+
+.cta-button:hover {
+  background-color: rgb(
+    51,
+    37,
+    26
+  ); /* Solo el cambio de color al hacer hover */
 }
