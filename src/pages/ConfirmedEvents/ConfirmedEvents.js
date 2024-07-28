@@ -1,6 +1,7 @@
 import { fetchRequest } from '../../../utils/API/fetch';
 import { renderPage } from '../../../utils/functions/renderPage';
 import { createEventComponent } from '../../components/EventComponent/EventComponent';
+import './ConfirmedEvents.css';
 
 export const ConfirmedEvents = async () => {
   const div = renderPage('confirmed-events');
@@ -8,8 +9,6 @@ export const ConfirmedEvents = async () => {
     console.error('Contenedor "confirmed-events" no encontrado');
     return;
   }
-
-  div.innerHTML = '<h1>Eventos Confirmados</h1>';
 
   const userId = localStorage.getItem('userId');
   const token = localStorage.getItem('token');

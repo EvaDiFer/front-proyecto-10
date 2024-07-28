@@ -29,7 +29,7 @@ export const Attendee = async () => {
       eventElement.className = 'event-item';
       eventElement.innerHTML = `
         <h2>${event.title}</h2>
-        <p>Attendants: ${event.attendants.join(', ')}</p>
+        <p>Asistentes: ${event.attendants.join(', ')}</p>
       `;
       eventsList.appendChild(eventElement);
     });

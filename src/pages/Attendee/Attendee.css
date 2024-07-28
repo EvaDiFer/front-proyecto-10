@@ -1,49 +1,78 @@
+/* Contenedor principal */
 #attendee {
-  min-height: 90svh;
-  background-color: rgb(205, 140, 180);
+  min-height: 90vh;
+  background: linear-gradient(
+    135deg,
+    rgba(245, 242, 242, 0.8) 0%,
+    rgba(230, 230, 230, 0.8) 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Attendee.css */
-
-/* Estilos generales para la lista de eventos */
+/* Lista de eventos */
 .events-list {
   display: flex;
   flex-direction: column;
-  gap: 1em; /* Espacio entre los eventos */
-  padding: 1em;
+  margin: auto;
+  gap: 1.5em; /* Espacio entre los eventos */
+  width: 100%;
+  max-width: 800px;
+  opacity: 0; /* Iniciar opacidad en 0 */
+  transform: translateX(100%); /* Iniciar fuera de pantalla a la derecha */
+  animation: slideIn 1s forwards; /* Animación de deslizamiento */
+  animation-delay: 0.5s; /* Retraso antes de que comience la animación */
 }
 
-/* Estilos individuales para cada evento */
+/* Animación de deslizamiento */
+@keyframes slideIn {
+  to {
+    opacity: 1; /* Opacidad final */
+    transform: translateX(0); /* Posición final */
+  }
+}
+
+/* Elemento de evento individual */
 .event-item {
-  background-color: #f9f9f9; /* Fondo claro para los eventos */
-  border: 1px solid #ddd; /* Borde gris claro */
-  border-radius: 5px; /* Bordes redondeados */
-  padding: 1em;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  background-color: #ffffff; /* Fondo blanco */
+  border: 1px solid #e0e0e0; /* Borde gris claro */
+  border-radius: 10px; /* Bordes más redondeados */
+  padding: 1.5em;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  transition: transform 0.2s, box-shadow 0.2s; /* Animación para hover */
 }
 
-/* Estilo para el título del evento */
+.event-item:hover {
+  transform: translateY(-5px); /* Efecto de elevar al pasar el mouse */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+}
+
 .event-item h2 {
   margin-top: 0;
-  font-size: 1.5em;
+  margin-bottom: 0.5em;
+  font-size: 1.75em;
   color: #333; /* Color de texto oscuro */
 }
 
-/* Estilo para la lista de asistentes */
 .event-item p {
   margin: 0;
   font-size: 1em;
   color: #666; /* Color de texto más claro */
 }
 
-/* Estilo para los asistentes */
 .event-item p span {
   font-weight: bold;
+  color: #333; /* Color de texto oscuro */
 }
 
-/* Opcional: mejorar el aspecto del contenedor principal */
-.attendee-container {
-  max-width: 800px; /* Ancho máximo del contenedor */
-  margin: 0 auto; /* Centrar el contenedor en la página */
-  padding: 1em;
+/* Media queries para responsividad */
+@media (max-width: 600px) {
+  .event-item {
+    padding: 1em;
+  }
+
+  .event-item h2 {
+    font-size: 1.5em;
+  }
 }

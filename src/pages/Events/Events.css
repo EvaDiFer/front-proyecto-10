@@ -1,47 +1,111 @@
+/* Contenedor principal */
 #events {
   min-height: 90svh;
   display: flex;
-  flex-wrap: wrap; /* Permite que los eventos se envuelvan a la siguiente fila si no caben en una sola fila */
-  background-color: rgb(98, 140, 57);
-  gap: 10px; /* Añade espacio entre los eventos */
-  padding: 10px; /* Añade un poco de relleno alrededor del contenedor */
+  flex-wrap: wrap;
+  background-color: rgba(245, 242, 242, 0.8);
+  gap: 15px; /* Reducir el espacio entre los eventos */
+  padding: 15px; /* Reducir el relleno alrededor del contenedor */
+  justify-content: center; /* Centrar los eventos en el contenedor */
 }
 
+/* Estilo de cada evento */
 .event {
   display: flex;
-  flex-direction: column; /* Asegura que el contenido interno del evento esté en columna */
+  flex-direction: column;
   align-items: center;
-  height: 400px;
-  justify-content: center;
-  border: 1px solid #ccc;
-  border-radius: 60%;
-  padding: 15px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 280px; /* Ancho fijo reducido */
+  height: 400px; /* Altura fija reducida */
+  border: 3px solid #ccc; /* Borde ligeramente más delgado */
+  border-radius: 10px; /* Bordes redondeados sutiles */
+  background-color: #fff; /* Fondo blanco */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+  overflow: hidden; /* Oculta el desbordamiento */
+  text-align: center; /* Centrar el texto */
+  position: relative; /* Para posicionar elementos de manera relativa */
+  transition: transform 0.2s, box-shadow 0.2s; /* Animación para hover */
+  opacity: 0;
+  animation: slideInFromLeft 0.8s forwards; /* Animación al cargar */
 }
 
+.event:nth-child(even) {
+  animation: slideInFromRight 0.8s forwards; /* Animación al cargar para los eventos pares */
+}
+
+.event:hover {
+  transform: translateY(-3px); /* Efecto de elevar al pasar el mouse */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra más intensa */
+}
+
+/* Estilo de la imagen del evento */
+.event img {
+  width: 100%;
+  height: 150px; /* Altura de la imagen reducida */
+  object-fit: cover;
+  margin-bottom: 5px; /* Reduce el margen inferior */
+  filter: contrast(1.2) brightness(0.9); /* Aumentar contraste y reducir brillo */
+  transform: skewX(-5deg) scale(1.05); /* Aplicar distorsión y escalado */
+}
+
+/* Estilo del título del evento */
 .event h2 {
   color: #333;
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+  margin-top: 1rem; /* Reducir el margen superior */
+  font-size: 1.25rem; /* Tamaño de fuente ajustado */
 }
 
+/* Estilo del párrafo del evento */
 .event p {
+  margin-top: 0.75rem; /* Reducir el margen superior */
   color: #666;
-  margin-bottom: 8px;
+  flex-grow: 1; /* Hace que el párrafo crezca para ocupar el espacio disponible */
 }
 
-.event img {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 10px;
+/* Estilo del botón del evento */
+.event > button {
+  margin-top: 40px; /* Reducir el margen superior */
+  margin-bottom: 20px; /* Reducir el margen inferior */
+  background-color: rgb(193, 170, 151);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px; /* Reducir el padding */
+  font-size: 0.875rem; /* Reducir el tamaño de fuente */
+  cursor: pointer;
+  text-decoration: none;
 }
 
-/* Optional: Style the date, createdBy, and attendants paragraphs */
-.event p:not(:last-child) {
-  margin-bottom: 5px;
+.event > button:hover {
+  background-color: rgb(160, 120, 100);
+} /* Cambiar el color de fondo */
+
+/* Estilo del botón del evento deshabilitado */
+.event > button:disabled {
+  background-color: #ccc;
+  color: #666;
+  opacity: 0.6;
 }
 
-.event p:nth-last-child(1) {
-  font-style: italic;
+/* Animación de entrada desde la izquierda */
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animación de entrada desde la derecha */
+@keyframes slideInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

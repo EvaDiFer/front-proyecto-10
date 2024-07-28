@@ -1,31 +1,54 @@
 #login {
   display: flex;
+  height: 90svh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 20px;
+  background-color: rgba(245, 242, 242, 0.8);
+  color: rgb(79, 57, 30); /* Color para el texto del formulario */
   padding: 50px;
 }
 
+.main-button.button-toggle {
+  margin-bottom: 25px;
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 20px;
+  background-color: rgb(219, 208, 199);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.main-button.button-toggle:hover {
+  transform: translateY(-5px); /* Ajusta el valor según sea necesario */
+}
+
+/* Spinner (Square) */
 .spinner {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
+  margin-top: 6rem;
   position: absolute;
   left: 50%;
   top: 50%;
+  width: 32px;
+  height: 32px;
+  background: #0a0101;
+  border-radius: 4px;
+  transform-origin: -16px -32px;
+  animation: rotate 1s linear infinite;
   transform: translate(-50%, -50%);
   display: none; /* Initially hidden */
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
+@keyframes rotate {
+  0%,
   100% {
-    transform: rotate(360deg);
+    transform: rotate(-45deg) translate(-50%, -50%);
+  }
+  50% {
+    transform: rotate(-245deg) translate(-50%, -50%);
   }
 }

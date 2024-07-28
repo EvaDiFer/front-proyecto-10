@@ -12,7 +12,7 @@ export const Home = () => {
   backgroundDiv.className = 'background-container'; // Clase para el contenedor de fondo
 
   const backgroundImg = document.createElement('img');
-  backgroundImg.src = '/public/image (1) (2).png';
+  backgroundImg.src = '/image (1) (2).png';
   backgroundImg.alt = 'Fondo de pantalla';
   backgroundImg.className = 'background-image';
 
@@ -23,14 +23,13 @@ export const Home = () => {
   contentDiv.className = 'content-wrapper';
 
   const title = document.createElement('h1');
-  title.textContent = 'Bienvenidos a Nuestra Página de Eventos';
+  title.textContent = 'ArtEventsNow - Tu Guía de Eventos Artísticos';
   contentDiv.appendChild(title);
 
   const description = document.createElement('p');
-  description.textContent =
-    'Explora los eventos más emocionantes que hemos preparado para ti. ¡No te los pierdas!';
+  description.innerHTML =
+    'Tu aplicación definitiva para descubrir y asistir a eventos artísticos.<br>Desde exposiciones y ferias hasta inauguraciones y espectáculos.';
   contentDiv.appendChild(description);
-
   const registerMessage = document.createElement('p');
   registerMessage.textContent =
     'Para ver todos nuestros eventos exclusivos, por favor inicia sesión a continuación.';

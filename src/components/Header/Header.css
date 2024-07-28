@@ -1,13 +1,38 @@
-#app > header {
+.header-class {
   height: 10svh;
-  background-color: rgb(182, 226, 255);
-  padding: 20px;
+  padding: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  width: 100%;
+  background-color: rgba(
+    207,
+    206,
+    208,
+    0.5
+  ); /* Color de fondo del header con transparencia */
 }
 
-#app > header > nav > ul {
+.nav-class {
+  width: 100%;
+  padding: 10px; /* Fondo ligeramente transparente */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.468); /* Sombra suave */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  font-weight: 600; /* Transición suave */
+}
+
+.ul-class {
   display: flex;
-  gap: 30px;
+  justify-content: space-between;
+}
+
+.ul-class li a {
+  color: rgb(249, 249, 249);
+  font-size: 1.7rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.ul-class li a:hover {
+  color: rgb(53, 36, 22);
 }

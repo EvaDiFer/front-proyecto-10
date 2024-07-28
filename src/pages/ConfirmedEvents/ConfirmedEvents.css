@@ -1,4 +1,16 @@
 #confirmed-events {
   min-height: 90svh;
-  background-color: rgb(180, 226, 43);
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgba(245, 242, 242, 0.8);
+  gap: 15px; /* Reducir el espacio entre los eventos */
+  padding: 15px; /* Reducir el relleno alrededor del contenedor */
+  justify-content: center; /* Centrar los eventos en el contenedor */
+}
+
+.events-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 15px;
 }

@@ -31,8 +31,8 @@ export const Login = () => {
       showLogin = !showLogin;
       showLogin ? LoginForm(form) : RegisterForm(form);
       toggleButton.textContent = showLogin
-        ? 'Si no tienes cuenta click aqui'
-        : 'Si ya tienes cuenta click aqui';
+        ? 'Nuevo Usuario'
+        : 'Entra en tu cuenta';
       if (showLogin) {
         form.removeEventListener('submit', goRegister);
       } else {

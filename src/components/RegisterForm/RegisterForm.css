@@ -1,10 +1,54 @@
 .register-form {
+  margin-bottom: auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border-radius: 8px;
   padding: 30px;
   gap: 20px;
-  background-color: rgb(22, 6, 36);
-  color: rgb(157, 123, 188);
-  border: 3px solid rgb(156, 115, 194);
+  background-color: rgb(243, 243, 243);
+  border: 1px solid rgb(94, 44, 3); /* Ajustado al color del botón */
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.input-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: rgb(124, 108, 95);
+}
+
+.register-form input {
+  padding: 10px;
+  border: 1px solid rgb(124, 108, 95);
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.register-form input[type='password'] {
+  margin-left: 35px;
+}
+
+.register-form input[type='email'] {
+  margin-left: 75px;
+}
+.register-form button {
+  padding: 10px 100px;
+  font-size: 16px;
+  background-color: rgb(124, 108, 95);
+  justify-content: center;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.register-form button:hover {
+  background-color: rgb(51, 37, 26);
 }

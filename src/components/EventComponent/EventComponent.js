@@ -16,6 +16,13 @@ export const createEventComponent = (
   eventDiv.classList.add('event');
   eventDiv.id = `event-${event._id}`;
 
+  if (event.imageUrl) {
+    const image = document.createElement('img');
+    image.src = event.imageUrl;
+    image.alt = `Imagen para ${event.title}`;
+    eventDiv.appendChild(image);
+  }
+
   const title = document.createElement('h2');
   title.textContent = event.title;
   eventDiv.appendChild(title);
@@ -23,13 +30,6 @@ export const createEventComponent = (
   const description = document.createElement('p');
   description.textContent = event.description;
   eventDiv.appendChild(description);
-
-  if (event.imageUrl) {
-    const image = document.createElement('img');
-    image.src = event.imageUrl;
-    image.alt = `Imagen para ${event.title}`;
-    eventDiv.appendChild(image);
-  }
 
   const date = document.createElement('p');
   date.textContent = `Fecha: ${new Date(event.date).toLocaleDateString()}`;

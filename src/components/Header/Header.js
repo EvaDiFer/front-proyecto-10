@@ -7,9 +7,13 @@ export const Header = () => {
   const nav = document.createElement('nav');
   const ul = document.createElement('ul');
 
+  header.classList.add('header-class');
+  nav.classList.add('nav-class');
+  ul.classList.add('ul-class');
+
   app.append(header);
   header.append(nav);
-
   nav.append(ul);
+
   RenderLinks();
 };
