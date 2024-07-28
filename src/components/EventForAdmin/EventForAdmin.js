@@ -7,6 +7,14 @@ export const EventForAdmin = (event) => {
   eventDiv.id = `event-${event._id}`;
   console.log(`ID del evento en EventForAdmin: ${event._id}`);
 
+  // Crear y añadir la imagen si existe
+  if (event.imageUrl) {
+    const image = document.createElement('img');
+    image.src = event.imageUrl;
+    image.alt = `Imagen para ${event.title}`;
+    eventDiv.appendChild(image);
+  }
+
   // Crear y añadir el título
   const title = document.createElement('h2');
   title.textContent = event.title;
@@ -25,14 +33,6 @@ export const EventForAdmin = (event) => {
     console.log(
       'El creador no está disponible o el nombre de usuario es inválido.'
     );
-  }
-
-  // Crear y añadir la imagen si existe
-  if (event.imageUrl) {
-    const image = document.createElement('img');
-    image.src = event.imageUrl;
-    image.alt = `Imagen para ${event.title}`;
-    eventDiv.appendChild(image);
   }
 
   // Crear y añadir la fecha

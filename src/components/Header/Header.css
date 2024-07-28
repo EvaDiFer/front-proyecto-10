@@ -27,12 +27,12 @@
 }
 
 .ul-class li a {
-  color: rgb(249, 249, 249);
+  color: rgb(173, 143, 114);
   font-size: 1.7rem;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .ul-class li a:hover {
-  color: rgb(53, 36, 22);
+  color: rgb(0, 0, 0);
 }

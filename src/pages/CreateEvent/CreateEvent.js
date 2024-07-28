@@ -14,10 +14,6 @@ export const CreateEvent = async () => {
   const div = renderPage('create-event');
   const token = localStorage.getItem('token');
 
-  const heading = document.createElement('h1');
-  heading.textContent = 'Estos son todos los eventos creados';
-  div.appendChild(heading);
-
   // Crear el formulario
   const form = document.createElement('form');
   form.classList.add('event-form');
@@ -124,7 +120,6 @@ export const CreateEvent = async () => {
       const response = await fetchEvents(token);
 
       div.innerHTML = '';
-      div.appendChild(heading);
       div.appendChild(form); // Reagregar el formulario al contenedor
 
       response.forEach((event) => {
