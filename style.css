@@ -46,6 +46,14 @@
   font-family: 'Josefin Sans', sans-serif;
 }
 
+h1 {
+  font-size: 40px;
+}
+
+p {
+  font-size: 20px;
+}
+
 form {
   margin-bottom: auto;
   display: flex;
@@ -68,7 +76,7 @@ input {
 button {
   display: inline-block;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 18px;
   background-color: rgb(124, 108, 95);
   color: #fff;
   border: none;

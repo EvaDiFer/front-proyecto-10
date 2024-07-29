@@ -7,7 +7,6 @@ import { LoginForm } from '../../components/LoginForm/LoginForm';
 import { RegisterForm } from '../../components/RegisterForm/RegisterForm';
 import { CreateEvent } from '../CreateEvent/CreateEvent';
 import { Events } from '../Events/Events';
-import { UserGestion } from '../UserGestion/UserGestion';
 
 import './Login.css';
 
@@ -64,9 +63,9 @@ export const Login = () => {
               e: event,
               page: CreateEvent,
               path: '/event-administration',
-            }); // Redirige al administrador
+            });
           } else {
-            navigate({ e: event, page: Events, path: '/events' }); // Redirige a la página de eventos
+            navigate({ e: event, page: Events, path: '/events' });
           }
         }, 1000);
       } else {
@@ -74,11 +73,12 @@ export const Login = () => {
       }
     } catch (error) {
       console.error('Error en la autenticación:', error);
-      welcomeMessage.textContent = error.message || 'Error de autenticación.';
+      welcomeMessage.textContent = 'Error de autenticación.';
       welcomeMessage.style.display = 'block';
     } finally {
       setTimeout(() => {
         spinner.style.display = 'none';
+        welcomeMessage.textContent = '';
       }, 2000);
     }
   };

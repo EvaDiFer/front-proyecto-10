@@ -37,7 +37,7 @@ h2 {
 
 #user-table {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1100px;
   border-collapse: separate;
   border-spacing: 0;
   background-color: rgba(237, 221, 207, 0.982);
@@ -46,7 +46,6 @@ h2 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo de las celdas y encabezados */
 #user-table th,
 #user-table td {
   border: 1px solid #ddd;
@@ -76,7 +75,7 @@ h2 {
 }
 
 #user-gestion button {
-  margin: 1rem;
+  margin: 0.5rem;
 }
 
 .delete-btn {

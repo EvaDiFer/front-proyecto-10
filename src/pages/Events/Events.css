@@ -36,7 +36,7 @@
 }
 
 .event button {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .event img {
@@ -50,11 +50,12 @@
 
 .event h2 {
   margin-top: 1rem;
-  font-size: 1.25rem;
+  font-size: 20px;
 }
 
 .event p {
   margin-top: 0.75rem;
+  font-size: 18px;
   flex-grow: 1;
 }
 
