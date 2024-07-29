@@ -1,46 +1,49 @@
-/* Contenedor principal */
 #user-gestion {
   min-height: 90svh;
-  background-color: #f4f4f9; /* Fondo gris claro */
-  padding: 40px 20px;
-  font-family: 'Roboto', sans-serif; /* Tipografía moderna */
+  background-color: rgba(245, 242, 242, 0.8);
+  padding: 1rem;
+  gap: 1rem;
+  justify-content: center;
 }
 
-/* Estilo general de la sección */
-.user-gestion {
-  padding: 20px;
-  background-color: #fff; /* Fondo blanco para la sección */
-  border-radius: 12px; /* Bordes redondeados */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  overflow: hidden;
-}
-
-/* Estilo del encabezado */
-.user-gestion h2 {
+h2 {
   text-align: center;
-  margin-bottom: 30px;
-  font-size: 28px;
-  color: #333;
-  font-weight: 500;
 }
 
-/* Estilo del contenedor de la tabla */
+#search-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+#search-input {
+  width: 250px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#search-input:focus {
+  border-color: rgb(173, 143, 114);
+  box-shadow: 0 4px 8px rgba(114, 68, 5, 0.897);
+  outline: none;
+}
+
 #user-list {
   display: flex;
   justify-content: center;
-  overflow-x: auto; /* Desplazamiento horizontal si es necesario */
 }
 
-/* Estilo de la tabla */
 #user-table {
   width: 100%;
   max-width: 1200px;
   border-collapse: separate;
   border-spacing: 0;
+  background-color: rgba(237, 221, 207, 0.982);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Estilo de las celdas y encabezados */
@@ -51,24 +54,16 @@
   text-align: left;
 }
 
-/* Encabezados de la tabla */
 #user-table th {
-  background-color: #6200ea; /* Color de fondo moderno */
+  background-color: rgb(173, 143, 114);
   color: #ffffff;
   font-weight: 600;
 }
 
-/* Fila de la tabla */
-#user-table tr:nth-child(even) {
-  background-color: #f9f9f9; /* Alternancia de color */
-}
-
-/* Fila de la tabla al pasar el ratón */
 #user-table tr:hover {
-  background-color: #e8eaf6; /* Color de resaltado suave */
+  background-color: #ceced0ec; /* Color de resaltado suave */
 }
 
-/* Imagen de perfil */
 .user-item img.user-image {
   width: 50px;
   height: 50px;
@@ -76,26 +71,18 @@
   object-fit: cover;
 }
 
-/* Celdas de la tabla */
 .user-item td {
   vertical-align: middle;
 }
 
-/* Botón de eliminar */
-.delete-btn {
-  background-color: #e53935; /* Color rojo */
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+#user-gestion button {
+  margin: 1rem;
 }
 
-/* Estilo del botón al pasar el ratón */
+.delete-btn {
+  background-color: rgba(249, 85, 85, 0.87);
+}
+
 .delete-btn:hover {
-  background-color: #c62828; /* Color más oscuro al pasar el ratón */
-  transform: scale(1.05); /* Efecto de agrandar el botón */
+  background-color: rgba(164, 0, 0, 0.87);
 }

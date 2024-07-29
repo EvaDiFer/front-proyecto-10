@@ -37,7 +37,7 @@ export const Home = () => {
 
   div.appendChild(contentDiv);
 
-  const ctaSection = document.createElement('section');
+  const ctaSection = document.createElement('div');
   ctaSection.className = 'cta-section';
 
   const loginButton = Button({

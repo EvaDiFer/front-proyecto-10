@@ -1,14 +1,17 @@
-/* General Styles for #home */
 #home {
   min-height: 90svh;
   position: relative;
-  background-color: rgba(230, 209, 209, 0.144);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Inicia el contenido desde la parte superior */
+  padding-top: 10vh; /* Asegura que haya algo de espacio en la parte superior */
 }
 
-/* Styles for the Background Container */
 .background-container {
   position: absolute;
+  background-color: rgba(230, 209, 209, 0.144);
   top: 0;
   left: 0;
   width: 100%;
@@ -17,26 +20,23 @@
   overflow: hidden;
 }
 
-/* Styles for the Background Image */
 .background-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: grayscale(30%);
+  filter: grayscale(35%);
 }
 
 .content-wrapper {
-  position: absolute;
+  margin-bottom: 5rem;
   gap: 1rem;
-  top: 25%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   text-align: center;
   color: #0000007f;
   z-index: 2;
   display: flex;
   flex-direction: column;
+  align-items: center; /* Asegura que el contenido esté centrado horizontalmente */
 }
 
 @keyframes fadeInUp {
@@ -50,7 +50,6 @@
   }
 }
 
-/* Apply Animations to Text Elements */
 .content-wrapper h1,
 .content-wrapper p,
 .cta-section {
@@ -59,43 +58,17 @@
   animation: fadeInUp 1s ease-out forwards;
 }
 
-.content-wrapper h1 {
+.content-wrapper h1,
+p {
   animation-delay: 0.5s;
 }
 
-.content-wrapper p {
-  animation-delay: 1s;
-}
-
-/* Centering CTA Section and Adding Transition */
 .cta-section {
-  position: absolute;
-  top: 33%;
-  left: 43%;
-  transform: translate(-50%, -50%);
   text-align: center;
   z-index: 1;
   opacity: 0;
-
   animation-delay: 1.5s;
-}
-
-.cta-button {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: rgb(124, 108, 95);
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s; /* Solo la transición de cambio de color */
-}
-
-.cta-button:hover {
-  background-color: rgb(
-    51,
-    37,
-    26
-  ); /* Solo el cambio de color al hacer hover */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

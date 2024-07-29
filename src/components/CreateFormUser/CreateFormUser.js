@@ -19,7 +19,7 @@ export const ProfileForm = (updateProfile, defaultProfileImageUrl) => {
     <label for="profileImageUrl">Imagen de Perfil:</label>
     <input type="file" id="profileImageUrl" name="profileImageUrl" accept="image/*">
     <br>
-    <img id="currentProfileImage" src="${defaultProfileImageUrl}" alt="Imagen de Perfil" style="display:block; width:100px; height:100px;">
+    <img id="currentProfileImage" src="${defaultProfileImageUrl}" alt="Imagen de Perfil">
     <br>
     <button type="submit">Actualizar Perfil</button>
   `;

@@ -55,7 +55,7 @@ export const Login = () => {
         : await goRegister(event);
 
       if (isAuthenticated) {
-        welcomeMessage.textContent = 'Bienvenido!';
+        welcomeMessage.textContent = '¡Bienvenido!';
         welcomeMessage.style.display = 'block';
         setTimeout(() => {
           const role = localStorage.getItem('rol');

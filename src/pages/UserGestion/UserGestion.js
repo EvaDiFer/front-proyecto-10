@@ -31,12 +31,12 @@ export const UserGestion = () => {
 
   const userListTableBody = div.querySelector('#user-table tbody');
   const searchInput = div.querySelector('#search-input');
-  const defaultProfileImageUrl = '/icons8-usuario-48.png'; // Asegúrate de que esta ruta sea correcta
+  const defaultProfileImageUrl = '/icons8-usuario-48.png';
   let allUsers = [];
 
   const renderUsers = async (searchTerm = '') => {
     try {
-      const token = localStorage.getItem('token'); // Obtener el token desde localStorage
+      const token = localStorage.getItem('token');
       if (!token) {
         throw new Error('No se encontró un token de autenticación');
       }

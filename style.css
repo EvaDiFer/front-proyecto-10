@@ -45,3 +45,38 @@
   text-decoration: none;
   font-family: 'Josefin Sans', sans-serif;
 }
+
+form {
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  padding: 30px;
+  gap: 20px;
+  background-color: rgb(243, 243, 243);
+  border: 1px solid rgb(94, 44, 3);
+  color: rgb(79, 57, 30);
+}
+
+input {
+  padding: 10px;
+  border: 1px solid rgb(124, 108, 95);
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: rgb(124, 108, 95);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: rgb(51, 37, 26);
+}

@@ -1,98 +1,22 @@
 #perfil {
   display: flex;
   justify-content: center;
+  background-color: rgba(245, 242, 242, 0.8);
   align-items: center;
-  min-height: 90vh; /* Altura mínima del contenedor */
+  min-height: 90vh;
   width: 100%;
-  padding: 1rem; /* Espaciado para evitar el desbordamiento */
-  box-sizing: border-box; /* Incluir padding en el ancho total */
+  padding: 1rem;
 }
 
-#updateProfileForm {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  max-width: 360px; /* Ancho máximo del formulario reducido */
-  padding: 15px; /* Reducido para ajustar el contenido */
-  border-radius: 8px;
-  background-color: rgb(243, 243, 243); /* Color de fondo del formulario */
-  border: 1px solid rgb(94, 44, 3); /* Color del borde */
-  color: rgb(79, 57, 30); /* Color del texto */
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.5s forwards; /* Aplicar la animación */
+#perfil > form {
+  gap: 3px;
 }
 
-/* Definición de la animación */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Estilos para las etiquetas y entradas */
-#updateProfileForm .input-group {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-
-#updateProfileForm label {
-  margin-bottom: 4px; /* Reducido para ahorrar espacio */
-  font-weight: bold;
-  color: rgb(124, 108, 95); /* Color de las etiquetas */
-}
-
-#updateProfileForm input[type='text'],
-#updateProfileForm input[type='email'],
-#updateProfileForm input[type='password'],
-#updateProfileForm input[type='file'] {
-  padding: 8px; /* Reducido para ajustar el contenido */
-  border: 1px solid rgb(124, 108, 95); /* Color del borde */
-  border-radius: 5px;
-  font-size: 15px; /* Tamaño de fuente reducido */
-  width: 100%;
-  margin-bottom: 15px; /* Espacio entre campos reducido */
-  box-sizing: border-box; /* Incluir padding en el ancho total */
-}
-
-#updateProfileForm input[type='file'] {
-  padding: 0;
-}
-
-/* Estilos para la imagen de perfil */
 #currentProfileImage {
   margin-top: 10px;
-  width: 80px; /* Reducido para ajustarse al tamaño del formulario */
-  height: 80px;
+  width: 90px;
+  height: 90px;
   object-fit: cover;
   border-radius: 50%;
-  border: 1px solid rgb(124, 108, 95); /* Color del borde */
-}
-
-/* Estilos para el botón */
-#updateProfileForm button {
-  padding: 8px 16px; /* Ajustado para adaptarse al nuevo tamaño */
-  font-size: 15px; /* Tamaño de fuente reducido */
-  background-color: rgb(124, 108, 95); /* Color de fondo del botón */
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  align-self: center; /* Centrar el botón */
-}
-
-#updateProfileForm button:hover {
-  background-color: rgb(
-    51,
-    37,
-    26
-  ); /* Color de fondo del botón al pasar el mouse */
+  border: 1px solid rgb(124, 108, 95);
 }

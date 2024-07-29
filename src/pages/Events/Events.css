@@ -1,92 +1,69 @@
-/* Contenedor principal */
 #events {
   min-height: 90svh;
   display: flex;
   flex-wrap: wrap;
   background-color: rgba(245, 242, 242, 0.8);
-  gap: 15px; /* Reducir el espacio entre los eventos */
-  padding: 15px; /* Reducir el relleno alrededor del contenedor */
-  justify-content: center; /* Centrar los eventos en el contenedor */
+  padding: 1rem;
+  gap: 1rem;
+  justify-content: center;
 }
 
-/* Estilo de cada evento */
 .event {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 280px; /* Ancho fijo reducido */
-  height: 500px; /* Altura fija reducida */
-  border: 3px solid #ccc; /* Borde ligeramente más delgado */
-  border-radius: 10px; /* Bordes redondeados sutiles */
-  background-color: #fff; /* Fondo blanco */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
-  overflow: hidden; /* Oculta el desbordamiento */
-  text-align: center; /* Centrar el texto */
-  position: relative; /* Para posicionar elementos de manera relativa */
-  transition: transform 0.2s, box-shadow 0.2s; /* Animación para hover */
+  width: 280px;
+  height: 500px;
+  border: 3px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
   opacity: 0;
-  animation: slideInFromLeft 0.8s forwards; /* Animación al cargar */
+  animation: slideInFromLeft 0.8s forwards;
 }
 
 .event:nth-child(even) {
-  animation: slideInFromRight 0.8s forwards; /* Animación al cargar para los eventos pares */
+  animation: slideInFromRight 0.8s forwards;
 }
 
 .event:hover {
-  transform: translateY(-3px); /* Efecto de elevar al pasar el mouse */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra más intensa */
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilo de la imagen del evento */
+.event button {
+  margin-bottom: 2rem;
+}
+
 .event img {
   width: 100%;
-  height: 150px; /* Altura de la imagen reducida */
+  height: 150px;
   object-fit: cover;
-  margin-bottom: 5px; /* Reduce el margen inferior */
-  filter: contrast(1.2) brightness(0.9); /* Aumentar contraste y reducir brillo */
-  transform: skewX(-5deg) scale(1.05); /* Aplicar distorsión y escalado */
+  margin-bottom: 5px;
+  filter: contrast(1.2) brightness(0.9);
+  transform: skewX(-5deg) scale(1.05);
 }
 
-/* Estilo del título del evento */
 .event h2 {
-  color: #333;
-  margin-top: 1rem; /* Reducir el margen superior */
-  font-size: 1.25rem; /* Tamaño de fuente ajustado */
+  margin-top: 1rem;
+  font-size: 1.25rem;
 }
 
-/* Estilo del párrafo del evento */
 .event p {
-  margin-top: 0.75rem; /* Reducir el margen superior */
-  color: #666;
-  flex-grow: 1; /* Hace que el párrafo crezca para ocupar el espacio disponible */
+  margin-top: 0.75rem;
+  flex-grow: 1;
 }
 
-/* Estilo del botón del evento */
-.event > button {
-  margin-top: 40px; /* Reducir el margen superior */
-  margin-bottom: 20px; /* Reducir el margen inferior */
-  background-color: rgb(193, 170, 151);
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 16px; /* Reducir el padding */
-  font-size: 0.875rem; /* Reducir el tamaño de fuente */
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.event > button:hover {
-  background-color: rgb(160, 120, 100);
-} /* Cambiar el color de fondo */
-
-/* Estilo del botón del evento deshabilitado */
 .event > button:disabled {
   background-color: #ccc;
   color: #666;
   opacity: 0.6;
 }
 
-/* Animación de entrada desde la izquierda */
 @keyframes slideInFromLeft {
   0% {
     opacity: 0;
@@ -98,7 +75,6 @@
   }
 }
 
-/* Animación de entrada desde la derecha */
 @keyframes slideInFromRight {
   0% {
     opacity: 0;

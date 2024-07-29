@@ -1,146 +1,78 @@
-/* Contenedor principal que aloja el formulario y los eventos */
 #create-event {
-  height: 90svh;
-  display: flex; /* Usar flexbox para alinear horizontalmente el formulario y los eventos */
-  gap: 20px; /* Espacio entre el formulario y los eventos */
-  padding: 20px;
-  background-color: rgb(181, 194, 168); /* Fondo para el contenedor principal */
-}
-
-/* Contenedor del formulario */
-.event-form-container {
-  flex: 1; /* El formulario ocupa el espacio disponible */
-  max-width: 200px; /* Limitar el ancho del formulario */
+  min-height: 90svh;
   display: flex;
-  justify-content: center; /* Centrar el formulario horizontalmente */
+  flex-wrap: wrap;
+  background-color: rgba(245, 242, 242, 0.8);
+  padding: 1rem;
+  gap: 1rem;
+  justify-content: center;
 }
 
-/* Estilo para el formulario */
 .event-form {
-  width: 50%; /* Ancho completo del contenedor del formulario */
-  height: 50%;
-  padding: 15px; /* Reducido padding */
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #ddd; /* Borde del formulario */
-  border-radius: 8px; /* Bordes redondeados más sutiles */
-  background-color: #ffffff; /* Fondo blanco */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra más sutil */
+  width: 400px;
+  height: 500px;
 }
 
-/* Estilo del formulario */
-.event-form input,
 .event-form textarea {
-  padding: 8px; /* Reducido padding */
-  border: 1px solid #ccc; /* Borde gris claro */
-  border-radius: 6px; /* Bordes redondeados */
-  font-size: 0.9rem; /* Tamaño del texto reducido */
-  margin-bottom: 10px; /* Espacio debajo de cada campo */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
 }
 
 .event-form input[type='date'] {
-  padding: 8px; /* Reducido padding */
+  padding: 8px;
 }
 
 .event-form textarea {
   resize: vertical;
-  min-height: 100px; /* Altura mínima menor */
+  min-height: 100px;
 }
 
-.event-form button {
-  padding: 8px 12px; /* Reducido padding */
-  border: none;
-  border-radius: 6px; /* Bordes redondeados */
-  background-color: #007bff; /* Color de fondo del botón */
-  color: white;
-  font-size: 0.9rem; /* Tamaño del texto reducido */
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s; /* Transiciones suaves */
-}
-
-.event-form button:hover {
-  background-color: #0056b3; /* Color del botón al pasar el ratón */
-  transform: scale(1.03); /* Efecto de escalado menor al pasar el ratón */
-}
-
-/* Contenedor de eventos */
-.event-list-container {
-  flex: 2; /* Los eventos ocupan el doble del espacio que el formulario */
-  display: flex;
-  flex-wrap: wrap; /* Permite que los eventos se envuelvan a la siguiente fila si es necesario */
-  gap: 15px; /* Espacio más estrecho entre los eventos */
-}
-
-/* Estilo para cada evento */
 .event-admin {
   display: flex;
-  flex-direction: column; /* Asegura que el contenido interno del evento esté en columna */
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  flex: 1 1 calc(33% - 15px); /* Tres eventos por fila con un espacio entre ellos */
-  max-width: 320px;
-  height: 400px; /* Limita el ancho máximo para mayor flexibilidad */
-  border: 1px solid #ddd; /* Color de borde más suave */
-  border-radius: 8px; /* Bordes redondeados más sutiles */
-  padding: 15px; /* Reducido padding */
-  background-color: #ffffff; /* Fondo blanco para contraste */
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Sombra más sutil */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+  width: 280px;
+  height: 500px;
+  padding: 0.2rem;
+  border: 3px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  text-align: center;
 }
 
-/* Estilo al pasar el ratón sobre un evento */
-.event-admin:hover {
-  transform: translateY(-4px); /* Eleva el contenedor ligeramente */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
-}
-
-/* Botones dentro de los eventos */
-.main-button {
-  display: flex;
-  gap: 8px; /* Espacio entre los botones */
-  gap: 20px;
-  margin-top: 10px; /* Espacio arriba de los botones */
-  cursor: pointer;
-}
-.main-button:hover {
-  display: flex;
-  gap: 8px; /* Espacio entre los botones */
-  gap: 20px;
-  margin-top: 10px; /* Espacio arriba de los botones */
-  cursor: pointer;
-  background-color: #7aa2ce;
-  transition: background-color 0.3s, transform 0.3s;
-}
-
-/* Título del evento */
 .event-admin h2 {
-  font-size: 1.15rem; /* Tamaño del texto reducido */
-  color: #333; /* Color oscuro */
-  margin-bottom: 8px; /* Espacio debajo del título */
-  font-weight: 600; /* Peso de la fuente */
-  text-align: center; /* Alineación centrada */
+  margin-top: 0.5rem;
+  font-size: 1.15rem;
+  color: #333;
+  font-weight: 600;
+  text-align: center;
 }
 
-/* Descripción del evento */
+.event-admin button {
+  margin: 0.5rem;
+}
 .event-admin p {
-  font-size: 0.85rem; /* Tamaño del texto reducido */
-  color: #555; /* Color gris oscuro */
-  margin-bottom: 8px; /* Espacio debajo de cada párrafo */
-  text-align: center; /* Alineación centrada */
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: #555;
+  text-align: center;
 }
 
-/* Imagen del evento */
 .event-admin img {
-  max-width: 100%; /* Ajusta el tamaño de la imagen al contenedor */
-  height: auto; /* Mantiene la proporción de la imagen */
-  border-radius: 6px; /* Bordes redondeados suaves */
-  margin-bottom: 8px; /* Espacio debajo de la imagen */
-  object-fit: cover; /* Cubre el área asignada sin distorsionar */
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 5px;
+  filter: contrast(1.2) brightness(0.9);
+  transform: skewX(-5deg) scale(1.05);
 }
 
-/* Estilo para la fecha */
 .event-admin .date {
-  font-size: 0.75rem; /* Tamaño del texto reducido */
-  color: #888; /* Color gris claro */
-  text-align: center; /* Alineación centrada */
+  font-size: 0.75rem;
+  color: #888;
+  text-align: center;
 }
