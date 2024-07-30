@@ -31,3 +31,88 @@
 .ul-class li a:hover {
   color: rgb(0, 0, 0);
 }
+
+@media (max-width: 767px) {
+  .burger-button {
+    display: block;
+    background-color: transparent;
+    border: none;
+    color: rgb(124, 108, 95);
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  .burger-button:hover {
+    background-color: transparent;
+  }
+
+  .ul-class {
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: rgba(207, 206, 208, 0.9);
+    position: absolute;
+    top: 10svh; /* Just below the header */
+    left: 0;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .ul-class.ul-open {
+    display: flex;
+  }
+
+  .ul-class li {
+    margin: 10px 0;
+  }
+
+  .ul-class li a {
+    color: rgb(173, 143, 114);
+    font-size: 1.4rem;
+    text-decoration: none;
+    padding: 10px;
+    transition: color 0.3s ease;
+  }
+
+  .ul-class li a:hover {
+    color: rgb(0, 0, 0);
+  }
+
+  .nav-class {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .burger-button {
+    display: none;
+  }
+
+  .ul-class {
+    display: flex;
+  }
+
+  .ul-class li a {
+    font-size: 1.5rem;
+  }
+
+  .nav-class {
+    padding: 8px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .burger-button {
+    display: none;
+  }
+
+  .ul-class {
+    display: flex; /* Mostrar el menú de navegación en pantallas grandes */
+  }
+}
