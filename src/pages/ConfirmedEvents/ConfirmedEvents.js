@@ -13,9 +13,6 @@ export const ConfirmedEvents = async () => {
   const userId = localStorage.getItem('userId');
   const token = localStorage.getItem('token');
 
-  console.log('userId:', userId);
-  console.log('token:', token);
-
   if (!userId) {
     div.innerHTML +=
       '<p>No se encontró el ID del usuario en el localStorage.</p>';
@@ -30,7 +27,6 @@ export const ConfirmedEvents = async () => {
       isJSON: true,
     });
 
-    console.log('Respuesta de la API:', response);
     const events = response.attendingEvents;
 
     if (!events || events.length === 0) {
@@ -38,16 +34,13 @@ export const ConfirmedEvents = async () => {
       return;
     }
 
-    console.log('Eventos confirmados:', events);
-
     const eventsContainer = document.createElement('div');
     eventsContainer.classList.add('events-container');
 
     events.forEach((event) => {
-      console.log('Evento en createEventComponent:', event);
       const eventElement = createEventComponent(
         event,
-        'Cancelar Asistencia', // Texto del botón
+        'Cancelar Asistencia',
         false,
         true // Indica que estamos en la página de eventos confirmados
       );
@@ -55,6 +48,40 @@ export const ConfirmedEvents = async () => {
     });
 
     div.appendChild(eventsContainer);
+
+    // Añadir un listener global para actualizar la lista de eventos confirmados
+    window.addEventListener('attendanceChanged', async () => {
+      // Limpia el contenedor actual
+      eventsContainer.innerHTML = '';
+
+      // Re-fetch the events
+      try {
+        const updatedResponse = await fetchRequest({
+          endpoint: `/users/${userId}`,
+          method: 'GET',
+          token,
+          isJSON: true,
+        });
+        const updatedEvents = updatedResponse.attendingEvents;
+
+        if (!updatedEvents || updatedEvents.length === 0) {
+          div.innerHTML = '<p>No tienes eventos confirmados.</p>';
+        } else {
+          updatedEvents.forEach((event) => {
+            const updatedEventElement = createEventComponent(
+              event,
+              'Cancelar Asistencia',
+              false,
+              true
+            );
+            eventsContainer.appendChild(updatedEventElement);
+          });
+        }
+      } catch (error) {
+        console.error('Error al actualizar eventos confirmados:', error);
+        div.innerHTML = `<p>Error al actualizar eventos confirmados: ${error.message}</p>`;
+      }
+    });
   } catch (error) {
     console.error('Error en la solicitud:', error);
     div.innerHTML += `<p>Error al cargar eventos confirmados: ${error.message}</p>`;

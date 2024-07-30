@@ -1,8 +1,22 @@
+import { fetchRequest } from '../../../utils/API/fetch';
 import { cancelAttendance } from '../../../utils/functions/cancelAttendance';
 import { confirmAttendance } from '../../../utils/functions/confirmAttendance';
 
 const getCurrentUserId = () => {
   return localStorage.getItem('userId') || 'defaultUserId';
+};
+
+const fetchAttendeesByEvent = async (eventId, token) => {
+  try {
+    const response = await fetchRequest({
+      endpoint: `/events/${eventId}/attendees`,
+      token,
+    });
+    return response;
+  } catch (error) {
+    console.error('Error al obtener la lista de asistentes:', error);
+    return [];
+  }
 };
 
 export const createEventComponent = (
@@ -14,6 +28,9 @@ export const createEventComponent = (
   const eventDiv = document.createElement('div');
   eventDiv.classList.add('event');
   eventDiv.id = `event-${event._id}`;
+
+  const token = localStorage.getItem('token');
+  const userId = getCurrentUserId();
 
   if (event.imageUrl) {
     const image = document.createElement('img');
@@ -43,52 +60,67 @@ export const createEventComponent = (
     eventDiv.appendChild(createdBy);
   }
 
-  const userId = getCurrentUserId();
-  const storageKey = `attendance-${event._id}-${userId}`;
-  const storedAttendanceStatus = localStorage.getItem(storageKey);
-  const isAttendanceConfirmed = storedAttendanceStatus === 'confirmed';
-
   const actionButton = document.createElement('button');
 
-  if (isConfirmedPage) {
-    actionButton.textContent = isAttendanceConfirmed
-      ? 'Cancelar Asistencia'
-      : 'No Confirmado';
-    actionButton.disabled = !isAttendanceConfirmed;
-  } else {
-    actionButton.textContent = isAttendanceConfirmed
-      ? 'Asistencia Confirmada'
-      : buttonText;
-    actionButton.disabled = isAttendanceConfirmed;
-  }
-
-  actionButton.addEventListener('click', async () => {
+  const updateButtonState = (isConfirmed) => {
     if (isConfirmedPage) {
-      if (isAttendanceConfirmed) {
-        await cancelAttendance(event._id, userId);
-        localStorage.removeItem(storageKey);
-        actionButton.textContent = 'Asistencia Cancelada';
-        actionButton.disabled = true;
-
-        eventDiv.remove();
-      }
+      actionButton.textContent = isConfirmed
+        ? 'Cancelar Asistencia'
+        : 'No Confirmado';
+      actionButton.disabled = !isConfirmed;
     } else {
-      if (isAttendanceConfirmed) {
-        return;
-      } else if (actionButton.textContent === 'Confirmar Asistencia') {
-        await confirmAttendance(event._id, userId);
-        localStorage.setItem(storageKey, 'confirmed');
-        actionButton.textContent = 'Asistencia Confirmada';
-        actionButton.disabled = true;
+      actionButton.textContent = isConfirmed
+        ? 'Asistencia Confirmada'
+        : buttonText;
+      actionButton.disabled = isConfirmed;
+    }
+  };
 
-        const confirmedEventsContainer =
-          document.getElementById('confirmed-events');
-        if (confirmedEventsContainer) {
-          confirmedEventsContainer.appendChild(eventDiv);
+  const handleAttendance = async () => {
+    try {
+      const attendees = await fetchAttendeesByEvent(event._id, token);
+      const isAttendanceConfirmed = attendees.some(
+        (attendant) => attendant._id === userId
+      );
+
+      if (isConfirmedPage) {
+        if (isAttendanceConfirmed) {
+          await cancelAttendance(event._id, userId, token);
+          updateButtonState(false);
+          eventDiv.remove();
+          window.dispatchEvent(new Event('attendanceChanged'));
+        }
+      } else {
+        if (isAttendanceConfirmed) {
+          return;
+        } else if (actionButton.textContent === 'Confirmar Asistencia') {
+          await confirmAttendance(event._id, userId, token);
+          updateButtonState(true);
+          const confirmedEventsContainer =
+            document.getElementById('confirmed-events');
+          if (confirmedEventsContainer) {
+            confirmedEventsContainer.appendChild(eventDiv);
+          }
+          window.dispatchEvent(new Event('attendanceChanged'));
         }
       }
+    } catch (error) {
+      console.error('Error al actualizar el estado de asistencia:', error);
     }
-  });
+  };
+
+  fetchAttendeesByEvent(event._id, token)
+    .then((attendees) => {
+      const isAttendanceConfirmed = attendees.some(
+        (attendant) => attendant._id === userId
+      );
+      updateButtonState(isAttendanceConfirmed);
+    })
+    .catch((error) => {
+      console.error('Error al obtener la lista de asistentes:', error);
+    });
+
+  actionButton.addEventListener('click', handleAttendance);
 
   eventDiv.appendChild(actionButton);
 
