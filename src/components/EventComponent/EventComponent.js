@@ -2,7 +2,6 @@ import { cancelAttendance } from '../../../utils/functions/cancelAttendance';
 import { confirmAttendance } from '../../../utils/functions/confirmAttendance';
 
 const getCurrentUserId = () => {
-  // Esta función debe devolver el ID del usuario actual. Ejemplo:
   return localStorage.getItem('userId') || 'defaultUserId';
 };
 
@@ -44,8 +43,8 @@ export const createEventComponent = (
     eventDiv.appendChild(createdBy);
   }
 
-  const userId = getCurrentUserId(); // Obtener el ID del usuario actual
-  const storageKey = `attendance-${event._id}-${userId}`; // Usar el ID del usuario en la clave del localStorage
+  const userId = getCurrentUserId();
+  const storageKey = `attendance-${event._id}-${userId}`;
   const storedAttendanceStatus = localStorage.getItem(storageKey);
   const isAttendanceConfirmed = storedAttendanceStatus === 'confirmed';
 
@@ -66,21 +65,17 @@ export const createEventComponent = (
   actionButton.addEventListener('click', async () => {
     if (isConfirmedPage) {
       if (isAttendanceConfirmed) {
-        // Cancelar la asistencia
         await cancelAttendance(event._id, userId);
         localStorage.removeItem(storageKey);
         actionButton.textContent = 'Asistencia Cancelada';
         actionButton.disabled = true;
 
-        // Eliminar el evento del DOM
         eventDiv.remove();
       }
     } else {
       if (isAttendanceConfirmed) {
-        // Asistencia ya confirmada, no hace nada
         return;
       } else if (actionButton.textContent === 'Confirmar Asistencia') {
-        // Confirmar asistencia
         await confirmAttendance(event._id, userId);
         localStorage.setItem(storageKey, 'confirmed');
         actionButton.textContent = 'Asistencia Confirmada';

@@ -5,20 +5,15 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  background-color: rgba(
-    207,
-    206,
-    208,
-    0.5
-  ); /* Color de fondo del header con transparencia */
+  background-color: rgba(207, 206, 208, 0.5);
 }
 
 .nav-class {
   width: 100%;
-  padding: 10px; /* Fondo ligeramente transparente */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.468); /* Sombra suave */
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.468);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  font-weight: 600; /* Transición suave */
+  font-weight: 600;
 }
 
 .ul-class {

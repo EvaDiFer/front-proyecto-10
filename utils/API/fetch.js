@@ -20,13 +20,11 @@ export const fetchRequest = async ({
 
   let finalBody;
   if (isFile) {
-    // Si es un archivo, usamos FormData
     finalBody = body;
     for (const key in body) {
       finalBody.append(key, body[key]);
     }
   } else {
-    // Si no, usamos JSON (o texto plano si isJSON es false)
     finalBody = isJSON ? JSON.stringify(body) : body;
   }
 
@@ -38,16 +36,13 @@ export const fetchRequest = async ({
     });
 
     if (!res.ok) {
-      // Manejo de errores HTTP
       const error = await res.text();
       throw new Error(`Error ${res.status}: ${error}`);
     }
 
-    // Asumimos que la respuesta es JSON
     const response = await res.json();
     return response;
   } catch (error) {
-    // Manejo de errores de red o parsing
     console.error('Error fetching data:', error);
     throw error;
   }

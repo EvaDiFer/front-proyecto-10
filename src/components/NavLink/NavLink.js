@@ -25,10 +25,8 @@ export const NavLink = ({ parentNode, link }) => {
     parentNode.append(li);
     a.addEventListener('click', (e) => navigate({ e, page, text, path }));
 
-    // Asegúrate de que el enlace se añade correctamente al parentNode.
     console.log(`Enlace añadido: ${text}`);
   } else {
-    // Caso para debuggear por qué no se añade el enlace.
     console.log(`Rol "${userRole}" no permitido para el enlace: ${text}`);
   }
 };

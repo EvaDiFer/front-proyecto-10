@@ -1,13 +1,12 @@
 import './EventForAdmin.css';
 
 export const EventForAdmin = (event) => {
-  console.log('Datos del evento:', event); // Log del objeto completo
+  console.log('Datos del evento:', event);
   const eventDiv = document.createElement('div');
   eventDiv.classList.add('event-admin');
   eventDiv.id = `event-${event._id}`;
   console.log(`ID del evento en EventForAdmin: ${event._id}`);
 
-  // Crear y añadir la imagen si existe
   if (event.imageUrl) {
     const image = document.createElement('img');
     image.src = event.imageUrl;
@@ -15,12 +14,10 @@ export const EventForAdmin = (event) => {
     eventDiv.appendChild(image);
   }
 
-  // Crear y añadir el título
   const title = document.createElement('h2');
   title.textContent = event.title;
   eventDiv.appendChild(title);
 
-  // Crear y añadir la descripción
   const description = document.createElement('p');
   description.textContent = event.description;
   eventDiv.appendChild(description);
@@ -35,7 +32,6 @@ export const EventForAdmin = (event) => {
     );
   }
 
-  // Crear y añadir la fecha
   const date = document.createElement('p');
   date.textContent = `Fecha: ${new Date(event.date).toLocaleDateString()}`;
   eventDiv.appendChild(date);

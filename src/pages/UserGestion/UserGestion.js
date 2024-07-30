@@ -42,19 +42,19 @@ export const UserGestion = () => {
       }
 
       const users = await fetchUsers(token);
-      allUsers = users; // Guardar todos los usuarios para búsquedas futuras
+      allUsers = users;
 
-      // Filtrar usuarios por userName que contiene el término de búsqueda
+      // Filtro por userName
       const filteredUsers = users.filter((user) =>
         user.userName.toLowerCase().includes(searchTerm.toLowerCase())
       );
 
-      userListTableBody.innerHTML = ''; // Limpiar la tabla de usuarios antes de renderizar
+      userListTableBody.innerHTML = '';
 
       filteredUsers.forEach((user) => {
         const profileImageUrl = user.profileImageUrl
           ? user.profileImageUrl
-          : defaultProfileImageUrl; // Usar operador ternario para la imagen de perfil
+          : defaultProfileImageUrl;
 
         const userRow = document.createElement('tr');
         userRow.className = 'user-item';
@@ -74,8 +74,8 @@ export const UserGestion = () => {
             if (confirmDelete) {
               try {
                 await deleteUserRequest(user._id, token);
-                userRow.remove(); // Eliminar la fila del DOM después de eliminar
-                detailsRow.remove(); // Eliminar la fila de detalles correspondiente
+                userRow.remove();
+                detailsRow.remove();
               } catch (error) {
                 console.error('Error al eliminar el usuario:', error);
               }
@@ -93,7 +93,6 @@ export const UserGestion = () => {
 
         userListTableBody.appendChild(userRow);
 
-        // Detalles adicionales
         const detailsRow = document.createElement('tr');
         detailsRow.className = 'user-details';
         detailsRow.innerHTML = `
@@ -106,11 +105,10 @@ export const UserGestion = () => {
             </div>
           </td>
         `;
-        detailsRow.style.display = 'none'; // Ocultar los detalles inicialmente
+        detailsRow.style.display = 'none';
 
         userListTableBody.appendChild(detailsRow);
 
-        // Agregar los botones a la fila de usuario
         const actionsCell = userRow.querySelector('td:nth-child(4)');
         actionsCell.appendChild(viewDetailsButton);
         actionsCell.appendChild(deleteButton);

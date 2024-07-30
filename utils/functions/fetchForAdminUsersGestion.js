@@ -3,14 +3,14 @@ import { fetchRequest } from '../API/fetch';
 export const fetchUsers = async (token) => {
   try {
     const response = await fetchRequest({
-      endpoint: '/users', // Ajusta el endpoint según tu API
+      endpoint: '/users',
       method: 'GET',
       token,
     });
-    return response; // Debería devolver la lista de usuarios
+    return response;
   } catch (error) {
     console.error('Error fetching users:', error);
-    throw error; // Propaga el error para que pueda ser manejado en la llamada de función
+    throw error;
   }
 };
 
