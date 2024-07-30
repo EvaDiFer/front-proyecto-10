@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:3000/api/v1';
+export const BASE_URL = 'https://back-proyecto-10.vercel.app/api/v1';
 
 export const fetchRequest = async ({
   endpoint,
