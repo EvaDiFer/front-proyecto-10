@@ -14,11 +14,14 @@ export const CreateEvent = async () => {
   const div = renderPage('create-event');
   const token = localStorage.getItem('token');
 
-  // Crear el formulario
+  const spinner = document.createElement('div');
+  spinner.className = 'spinner';
+  spinner.style.display = 'none';
+  div.appendChild(spinner);
+
   const form = document.createElement('form');
   form.classList.add('event-form');
 
-  // Crear los elementos del formulario
   const titleInput = document.createElement('input');
   titleInput.type = 'text';
   titleInput.placeholder = 'Título del evento';
@@ -41,15 +44,13 @@ export const CreateEvent = async () => {
   dateInput.name = 'date';
   form.appendChild(dateInput);
 
-  // Obtener el ID del creador del local storage
   const creatorId = localStorage.getItem('userId');
   const creatorInput = document.createElement('input');
-  creatorInput.type = 'hidden'; // Oculto para el usuario
+  creatorInput.type = 'hidden';
   creatorInput.name = 'createdBy';
   creatorInput.value = creatorId;
   form.appendChild(creatorInput);
 
-  // Crear el botón de enviar usando el componente Button
   const submitButton = Button({
     text: 'Crear Evento',
     fnc: (event) => {
@@ -60,7 +61,6 @@ export const CreateEvent = async () => {
   });
   form.appendChild(submitButton);
 
-  // Crear el botón de cancelar usando el componente Button (inicialmente no se muestra)
   const cancelButton = Button({
     text: 'Cancelar',
     fnc: (event) => {
@@ -69,17 +69,15 @@ export const CreateEvent = async () => {
     },
     className: 'cancel-button',
   });
-  cancelButton.style.display = 'none'; // Ocultar inicialmente
+  cancelButton.style.display = 'none';
   form.appendChild(cancelButton);
 
-  // Crear un elemento para el mensaje de archivo
   const fileMessage = document.createElement('p');
   fileMessage.textContent =
     'Seleccione una nueva imagen solo si desea actualizar la existente.';
-  fileMessage.style.display = 'none'; // Ocultarlo inicialmente
+  fileMessage.style.display = 'none';
   form.appendChild(fileMessage);
 
-  // Agregar formulario al contenedor principal
   div.appendChild(form);
 
   let isEditing = false;
@@ -110,22 +108,23 @@ export const CreateEvent = async () => {
     form.reset();
     submitButton.textContent = 'Crear Evento';
     fileMessage.style.display = 'none';
-    cancelButton.style.display = 'none'; // Ocultar el botón de cancelar
+    cancelButton.style.display = 'none';
     isEditing = false;
     editingEventId = null;
   };
 
   const loadEvents = async () => {
     try {
+      spinner.style.display = 'block';
+
       const response = await fetchEvents(token);
 
       div.innerHTML = '';
-      div.appendChild(form); // Reagregar el formulario al contenedor
+      div.appendChild(form);
 
       response.forEach((event) => {
         const eventComponent = EventForAdmin(event);
 
-        // Botón para eliminar evento usando el componente Button
         const deleteButton = Button({
           text: 'Eliminar evento',
           fnc: async () => {
@@ -147,24 +146,20 @@ export const CreateEvent = async () => {
         });
         eventComponent.appendChild(deleteButton);
 
-        // Botón para editar evento usando el componente Button
         const editButton = Button({
           text: 'Editar evento',
           fnc: () => {
-            // Llenar el formulario con los datos del evento
             titleInput.value = event.title;
             descriptionInput.value = event.description;
             dateInput.value = event.date.split('T')[0];
-            imageInput.value = ''; // Resetear el campo de archivo
+            imageInput.value = '';
 
-            // Configurar el formulario para la edición
             isEditing = true;
             editingEventId = event._id;
             submitButton.textContent = 'Actualizar Evento';
 
-            // Mostrar el mensaje de selección de archivo y el botón de cancelar
             fileMessage.style.display = 'block';
-            cancelButton.style.display = 'inline'; // Mostrar el botón de cancelar
+            cancelButton.style.display = 'inline';
           },
           className: 'edit-button',
         });
@@ -174,6 +169,8 @@ export const CreateEvent = async () => {
       });
     } catch (error) {
       console.error('Error al obtener eventos:', error.message);
+    } finally {
+      spinner.style.display = 'none';
     }
   };
 

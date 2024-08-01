@@ -9,11 +9,12 @@
 }
 
 .nav-class {
-  width: 100%;
-  padding: 10px;
+  width: 70%;
+  padding: 2px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.468);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  font-weight: 600;
+  font-weight: 400;
+  font-size: 10px;
 }
 
 .ul-class {
@@ -38,7 +39,7 @@
     background-color: transparent;
     border: none;
     color: rgb(124, 108, 95);
-    font-size: 2rem;
+    font-size: 1.5rem;
     cursor: pointer;
   }
 
@@ -96,14 +97,15 @@
 
   .ul-class {
     display: flex;
+    justify-content: space-around;
   }
 
   .ul-class li a {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .nav-class {
-    padding: 8px;
+    width: 70%;
   }
 }
 

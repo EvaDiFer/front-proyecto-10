@@ -14,6 +14,9 @@ export const UserGestion = () => {
     <div id="search-container">
       <input type="text" id="search-input" placeholder="Buscar por nombre..." />
     </div>
+    <div id="spinner-container" class="spinner">
+      <div id="spinner" class="spinner"></div>
+    </div>
     <div id="user-list">
       <table id="user-table">
         <thead>
@@ -31,10 +34,13 @@ export const UserGestion = () => {
 
   const userListTableBody = div.querySelector('#user-table tbody');
   const searchInput = div.querySelector('#search-input');
+  const spinnerContainer = div.querySelector('#spinner-container');
   const defaultProfileImageUrl = '/icons8-usuario-48.png';
   let allUsers = [];
 
   const renderUsers = async (searchTerm = '') => {
+    spinnerContainer.style.display = 'flex'; // Mostrar el spinner
+
     try {
       const token = localStorage.getItem('token');
       if (!token) {
@@ -113,10 +119,13 @@ export const UserGestion = () => {
         actionsCell.appendChild(viewDetailsButton);
         actionsCell.appendChild(deleteButton);
       });
+
+      spinnerContainer.style.display = 'none';
     } catch (error) {
       console.error('Error fetching users:', error);
       userListTableBody.innerHTML =
         '<tr><td colspan="4">Error al cargar la lista de usuarios</td></tr>';
+      spinnerContainer.style.display = 'none';
     }
   };
 

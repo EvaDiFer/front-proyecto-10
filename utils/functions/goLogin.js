@@ -22,11 +22,11 @@ export const goLogin = async (e) => {
 
     if (res && res.token && res.user) {
       localStorage.setItem('token', res.token);
-      localStorage.setItem('rol', res.user.rol); // Asegúrate de que 'rol' esté presente en la respuesta
+      localStorage.setItem('rol', res.user.rol);
       localStorage.setItem('userId', res.user._id);
 
       RenderLinks();
-      return true; // Indicar que la autenticación fue exitosa
+      return true;
     } else {
       let errorMessage = 'Error de autenticación.';
       if (res.error) {
@@ -34,10 +34,10 @@ export const goLogin = async (e) => {
       } else {
         errorMessage = 'Error desconocido.';
       }
-      throw new Error(errorMessage); // Lanzar una excepción en caso de error
+      throw new Error(errorMessage);
     }
   } catch (error) {
     console.error('Error durante la autenticación:', error);
-    throw new Error(error.message || 'Error de autenticación.'); // Lanzar una excepción en caso de error
+    throw new Error(error.message || 'Error de autenticación.');
   }
 };

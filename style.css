@@ -51,3 +51,20 @@ button {
 button:hover {
   background-color: rgb(51, 37, 26);
 }
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 600px) {
+  form {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  input {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+}
