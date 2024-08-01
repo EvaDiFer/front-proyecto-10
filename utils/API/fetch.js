@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://back-proyecto-10.vercel.app/';
+export const BASE_URL = 'https://back-proyecto-10.vercel.app';
 
 export const fetchRequest = async ({
   endpoint,
